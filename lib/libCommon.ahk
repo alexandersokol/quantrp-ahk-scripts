@@ -321,6 +321,14 @@ IsGameActive() {
 
 
 ; ====================================================================
+; Makes game window active
+;
+focusGame(){
+    WinActivate "GTA5.exe"
+}
+
+
+; ====================================================================
 ; Checks that currently is playing, not in the menu.
 ;
 isOnGamingScreen() {

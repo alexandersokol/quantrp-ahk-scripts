@@ -3,6 +3,7 @@
 
 #Include "lib\libCommon.ahk"
 #Include "lib\libMedic.ahk"
+#Include "lib\guiMedic.ahk"
 
 Persistent true
 requestAdminRights()
@@ -25,5 +26,5 @@ requestAdminRights()
     >^Home::Medic_MedCard_Lungs()
     >^End::Medic_MedCard_Sign()
 
-    >^X::Medic_CantFindABody()
+    >^x::Medic_CantFindABody()
 #HotIf

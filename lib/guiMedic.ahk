@@ -1,5 +1,7 @@
 #Requires AutoHotkey v2.0
 
+#Include "libMedic.ahk"
+
 TITLE_TEXT_COLOR := "cffffff"
 TITLE_TEXT_SIZE := "s12"
 
@@ -12,33 +14,35 @@ TEXT_SIZE := "s12"
 DIVIDER_COLOR := "c515151"
 BACKGROUND_COLOR := "c000000"
 
+global GTAWindowID := 0
+
 mainMenuComponents := [
-    uiText("Загальне", () => handleMenuClick("common")),
-    uiText("Мед. карта", () => handleMenuClick("medcard")),
-    uiText("Прайс лист", () => handleMenuClick("prices")),
-    uiText("Хірургія", () => handleMenuClick("surgeon")),
-    uiText("Скріншот"),
+    uiText("Загальне", () => GuiHandle_MenuClick("common")),
+    uiText("Мед. карта", () => GuiHandle_MenuClick("medcard")),
+    uiText("Прайс лист", () => GuiHandle_MenuClick("prices")),
+    uiText("Хірургія", () => GuiHandle_MenuClick("surgeon")),
+    uiText("Скріншот", () => GuiHandle_ClickAndHide(Take_ScreenShot)),
     uiDivider(),
     uiText("Закрити", () => hideAllMenus())
 ]
  
 commonMenuComponents := [
     uiTitle("Загальне"),
-    uiText("Жетон {LCtrl + Q}"),
-    uiText("Реанімація {LCtrl + 9}"),
-    uiText("Приняти кров {LCtrl + 0}"),
-    uiText("Вітамінка {LCtrl + -}"),
-    uiText("Блістер {LCtrl + =}"),
-    uiText("Немає тіла {LCtrl + X}"),
+    uiText("Жетон {LCtrl + Q}", () => GuiHandle_ClickAndHide(Medic_ShowBadge)),
+    uiText("Реанімація {LCtrl + 9}", () => GuiHandle_ClickAndHide(Medic_Reanimation)),
+    uiText("Приняти кров {LCtrl + 0}", () => GuiHandle_ClickAndHide(Medic_BloodDonation)),
+    uiText("Вітамінка {LCtrl + -}", () => GuiHandle_ClickAndHide(Medic_SellVitamins)),
+    uiText("Блістер {LCtrl + =}", () => GuiHandle_ClickAndHide(Medic_SellBlister)),
+    uiText("Немає тіла {LCtrl + X}", () => GuiHandle_ClickAndHide(GuiHandle_CantFindABody)),
     uiBack("main")
 ]
 
 medCardMenuComponents := [
     uiTitle("Загальне"),
-    uiText("Температура"),
-    uiText("Горло"),
-    uiText("Легені"),
-    uiText("Виписати Мед. Карту"),
+    uiText("Температура", () => GuiHandle_ClickAndActive(Medic_MedCard_Temperature)),
+    uiText("Горло", () => GuiHandle_ClickAndActive(Medic_MedCard_Throat)),
+    uiText("Легені",  () => GuiHandle_ClickAndActive(Medic_MedCard_Lungs)),
+    uiText("Виписати Мед. Карту",  () => GuiHandle_ClickAndActive(Medic_MedCard_Sign)),
     uiBack("main")
 ]
 
@@ -91,6 +95,13 @@ analysisComponents := [
     uiText("ДНК Тест"),
 ]
 
+emojiComponents := [
+    uiText("❤"),
+    uiText(""),
+    uiText(""),
+    uiText(""),
+]
+
 global mainGui := 0
 global surgeonMenu := 0
 global stomatologyMenu := 0
@@ -123,17 +134,18 @@ global menus := Map(
     ),
 )
 
-AppsKey::toggleMedicUiVisibility()
+`::toggleMedicUiVisibility()
 
 toggleMedicUiVisibility(){
     global menus
+
+    Sleep(200)
 
     if (isAnyMenuVisible()){
         hideAllMenus()
     } else {
         showMenu("main")
     }
-    
 }
 
 
@@ -216,7 +228,7 @@ uiBack(backMenuName) {
     return Map(
         "type", "back",
         "text", "Назад",
-        "onClickHandler", () => handleMenuClick(backMenuName)
+        "onClickHandler", () => GuiHandle_MenuClick(backMenuName)
     )
 }
 
@@ -281,7 +293,8 @@ appendDivider(menuGui, component){
 ;
 buildUiMenu(components) {
     menuGui := Gui()
-    menuGui.Opt("+AlwaysOnTop +SysMenu -Caption -DPIScale +ToolWindow +Border +Owner")
+    global GTAWindowID := WinActive("A")
+    menuGui.Opt("+AlwaysOnTop +SysMenu -Caption -DPIScale +ToolWindow +Border +Parent" GTAWindowID)
     menuGui.BackColor := BACKGROUND_COLOR
 
     Loop components.Length
@@ -314,9 +327,57 @@ buildUiMenu(components) {
 
 
 ; ====================================================================
+; Activate GTA 5 Game and hides menus
+;
+activateAndHideMenu(){
+    global GTAWindowID
+    WinActivate(GTAWindowID)
+    hideAllMenus()
+}
+
+
+; ====================================================================
 ; Closes all visible GUI menus and opens a new one by name passed.
 ;
-handleMenuClick(name){
+GuiHandle_MenuClick(name){
     hideAllMenus()
     showMenu(name)
+}
+
+
+; ====================================================================
+; Takes screenshot from menu
+;
+GuiHandle_Screenshot() {
+    activateAndHideMenu()
+    Take_ScreenShot()
+}
+
+
+; ====================================================================
+; Hides menu and calls a function
+;
+GuiHandle_ClickAndHide(func) {
+    activateAndHideMenu()
+    func.Call()
+}
+
+; ====================================================================
+; Makes game active and calls a function
+;
+GuiHandle_ClickAndActive(func) {
+    global GTAWindowID
+    WinActivate(GTAWindowID)
+    func.Call()
+}
+
+
+GuiHandle_ShowBadge() {
+    activateAndHideMenu()
+    Medic_ShowBadge()   
+}
+
+GuiHandle_CantFindABody() {
+    activateAndHideMenu()
+    Medic_CantFindABody()
 }

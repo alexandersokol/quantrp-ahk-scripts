@@ -419,10 +419,27 @@ CANT_FIND_A_BODY_VARIATIONS := [
 ; ====================================================================
 ; Creates a map with defined text, delay_before and delay_after
 ;
-text(text, delay_before := 0, delay_after := 0)
-{
+text(text, delay_before := 0, delay_after := 0) {
     return Map(
-        "text",text,
+        "type", "text",
+        "text", text,
+        "delay_before", delay_before,
+        "delay_after", delay_after
+    )
+}
+
+
+delay(timeMs) {
+    return Map(
+        "type", "delay",
+        "delay_before", timeMs
+    )
+}
+
+
+screenshot(delay_before := 0, delay_after := 0) {
+    return Map(
+        "type", "screenshot",
         "delay_before", delay_before,
         "delay_after", delay_after
     )
