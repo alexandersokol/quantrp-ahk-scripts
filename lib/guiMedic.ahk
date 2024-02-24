@@ -82,9 +82,9 @@ surgeonComponents := [
 stomatologyComponents := [
     uiTitle("Стоматологія"),
     uiText("Огляд | 10k", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothCheck)),
-    uiText("Пломбування | 20k"),
+    uiText("Пломбування | 20k", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothHeal)),
     uiText("Огляд. Установ. брекетів",  () => GuiHandle_ClickAndHide(Medic_Stomatology_BracketCheck)),
-    uiText("Установка беркетів | 75k"),
+    uiText("Установка беркетів | 75k", () => GuiHandle_ClickAndHide(Medic_Stomatology_BracketSetups)),
     uiText("Професійна чистка",  () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothCleaning)),
     uiText("Видалення зуба | 35k", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothRemoval)),
     uiText("Онтопантомограма", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothXRay)),

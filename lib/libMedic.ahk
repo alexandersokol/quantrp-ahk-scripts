@@ -61,6 +61,7 @@ PlainPlayScreenshot(map) {
     if map["delay_before"] > 0
         Sleep(map["delay_before"])
 
+    Sleep(200)
     Take_ScreenShot()
 
     if map["delay_after"] > 0
@@ -382,4 +383,22 @@ Medic_Stomatology_ToothRemoval() {
 Medic_Stomatology_ToothXRay() {
     Log("Medic_Stomatology_ToothXRay triggered")
     PlainTextSay(STOMATOLOGY_TOOTH_X_RAY)
+}
+
+
+; ====================================================================
+; Plays random text variation for stomatology brackets setup
+;
+Medic_Stomatology_BracketSetups() {
+    Log("Medic_Stomatology_BracketSetup triggered")
+    PlainTextSay(STOMATOLOGY_BRACKETS_SETUP)
+}
+
+
+; ====================================================================
+; Plays random text variation for stomatology tooth heal
+;
+Medic_Stomatology_ToothHeal() {
+    Log("Medic_Stomatology_ToothHeal triggered")
+    PlainTextSay(STOMATOLOGY_TOOTH_HEAL)
 }
