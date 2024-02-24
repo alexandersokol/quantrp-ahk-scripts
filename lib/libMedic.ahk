@@ -220,16 +220,16 @@ Medic_Analysis_Blood() {
     gemoglobin_min_v := 10.0
     gemoglobin_max_v := 20.0
 
-    gemoglobin_value := Random(gemoglobin_min_v * 10, gemoglobin_max_v * 10) / 10.0
+    gemoglobin_value := Round(Random(gemoglobin_min_v * 10, gemoglobin_max_v * 10) / 10.0, 2)
     gemoglobin_result := "Норма"
 
     if (gemoglobin_value > gemoglobin_max) {
-        gemoglobin_result := "більше норми: Гіпергемія - недостатня гідратація організму"
+        gemoglobin_result := "Гіпергемія - недостатня гідратація організму"
     } else if (gemoglobin_value < gemoglobin_min){
-        gemoglobin_result := "менше норми: Залізодефіцитна анемія/мало вітаміну B12"
+        gemoglobin_result := "Анемія: Залізодефіцит/мало вітаміну B12"
     }
 
-    gemoglobin_text := "Гемоглобін (Hb): " gemoglobin_value "г/дл (" gemoglobin_min " - " gematocrit_max ") - " gemoglobin_result
+    gemoglobin_text := "Гемоглобін (Hb): " gemoglobin_value "г/дл (" Round(gemoglobin_min, 2) " - " Round(gemoglobin_max, 2) ") - " gemoglobin_result
 
     ; RBC
     eretrotzit_min := 3.9
@@ -237,16 +237,16 @@ Medic_Analysis_Blood() {
     eretrotzit_min_v := 3.0
     eretrotzit_max_v := 6.5
 
-    eretrotzit_value := Random(eretrotzit_min_v * 10, eretrotzit_max_v * 10) / 10.0
+    eretrotzit_value := Round(Random(eretrotzit_min_v * 10, eretrotzit_max_v * 10) / 10.0, 2)
     eretrotzit_result := "Норма"
 
     if (eretrotzit_value > eretrotzit_max) {
-        eretrotzit_result := "більше норми: Гіпергемія - недостатня гідратація організму" ;гіпергемія
+        eretrotzit_result := "Гіпергемія - недостатня гідратація організму" ;гіпергемія
     } else if (eretrotzit_value < eretrotzit_min){
         eretrotzit_result := "Анемія: Залізодефіцит/мало вітаміну B12" ;анемія
     }
 
-    eretrotzit_text := "Еритроцити (RBC): " eretrotzit_value "млн/мкл (" eretrotzit_min " - " eretrotzit_max ") - " eretrotzit_result
+    eretrotzit_text := "Еритроцити (RBC): " eretrotzit_value "млн/мкл (" Round(eretrotzit_min, 2) " - " Round(eretrotzit_max, 2) ") - " eretrotzit_result
 
     ; WBC
     leikozit_min := 4.5
@@ -254,7 +254,7 @@ Medic_Analysis_Blood() {
     leikozit_min_v := 4.0
     leikozit_max_v := 12.0
 
-    leikozit_value := Random(leikozit_min_v * 10, leikozit_max_v * 10) / 10.0
+    leikozit_value := Round(Random(leikozit_min_v * 10, leikozit_max_v * 10) / 10.0, 2)
     leikozit_result := "Норма"
 
     if (leikozit_value > leikozit_max) {
@@ -263,7 +263,7 @@ Medic_Analysis_Blood() {
         leikozit_result := "Лейкопенія: Інфекція/Препарати" ; лейкопенія
     }
 
-    leikozit_text := "Лейкоцити (WBC): " leikozit_value "тис./мкл (" leikozit_min " - " leikozit_max ") - " leikozit_result
+    leikozit_text := "Лейкоцити (WBC): " leikozit_value "тис./мкл (" Round(leikozit_min, 2) " - " Round(leikozit_max, 2) ") - " leikozit_result
 
     ; PLT
     trombozit_min := 150
@@ -271,7 +271,7 @@ Medic_Analysis_Blood() {
     trombozit_min_v := 100
     trombozit_max_v := 550
 
-    trombozit_value := Random(trombozit_min_v * 10, trombozit_max_v * 10) / 10.0
+    trombozit_value := Round(Random(trombozit_min_v * 10, trombozit_max_v * 10) / 10)
     trombozit_result := "Норма"
 
     if (trombozit_value > trombozit_max) {
@@ -288,7 +288,7 @@ Medic_Analysis_Blood() {
     gematocrit_min_v := 33
     gematocrit_max_v := 52
 
-    gematocrit_value := Random(gematocrit_min_v, gematocrit_max_v )
+    gematocrit_value := Round(Random(gematocrit_min_v, gematocrit_max_v ))
     gematocrit_result := "Норма"
 
     if (gematocrit_value > gematocrit_max) {
@@ -299,16 +299,16 @@ Medic_Analysis_Blood() {
 
     gematocrit_text := "Гематокрит (Hct): " gematocrit_value "% (" gematocrit_min " - " gematocrit_max ") - " gematocrit_result
 
-    Chat_OOC(gemoglobin_text)
-    Sleep(750)
-    Chat_OOC(eretrotzit_text)
-    Sleep(750)
-    Chat_OOC(leikozit_text)
-    Sleep(750)
-    Chat_OOC(trombozit_text)
-    Sleep(750)
-    Chat_OOC(gematocrit_text)
-    Sleep(150)
+    Chat_Do(gemoglobin_text)
+    Sleep(1500)
+    Chat_Do(eretrotzit_text)
+    Sleep(1500)
+    Chat_Do(leikozit_text)
+    Sleep(1500)
+    Chat_Do(trombozit_text)
+    Sleep(1500)
+    Chat_Do(gematocrit_text)
+    Sleep(1500)
     Take_ScreenShot()
 }
 
