@@ -21,6 +21,7 @@ mainMenuComponents := [
     uiText("Мед. карта", () => GuiHandle_MenuClick("medcard")),
     uiText("Прайс лист", () => GuiHandle_MenuClick("prices")),
     uiText("Хірургія", () => GuiHandle_MenuClick("surgeon")),
+    uiText("Музика", () => GuiHandle_MenuClick("music"))
     uiText("Скріншот", () => GuiHandle_ClickAndHide(Take_ScreenShot)),
     uiDivider(),
     uiText("Закрити", () => hideAllMenus())
@@ -33,7 +34,7 @@ commonMenuComponents := [
     uiText("Приняти кров {LCtrl + 0}", () => GuiHandle_ClickAndHide(Medic_BloodDonation)),
     uiText("Вітамінка {LCtrl + -}", () => GuiHandle_ClickAndHide(Medic_SellVitamins)),
     uiText("Блістер {LCtrl + =}", () => GuiHandle_ClickAndHide(Medic_SellBlister)),
-    uiText("Немає тіла {LCtrl + X}", () => GuiHandle_ClickAndHide(GuiHandle_CantFindABody)),
+    uiText("Немає тіла {LCtrl + X}", () => GuiHandle_ClickAndHide(Medic_CantFindABody)),
     uiBack("main")
 ]
 
@@ -66,33 +67,61 @@ pricesMenuComponents := [
 
 surgeonComponents := [
     uiTitle("Хірургія"),
-    uiText("Дослідження"),
+    uiText("Дослідження", () => GuiHandle_MenuClick("analysis")),
     uiText("Гінекологія"),
     uiText("Проктологія"),
     uiText("Урологія"),
     uiText("Отоларингологія"),
-    uiText("Офтальмологія"),
+    uiText("Офтальмологія", () => GuiHandle_MenuClick("analysis")),
     uiText("Наркологія"),
-    uiText("Стоматологія"),
-    uiText("Операційна"),
+    uiText("Стоматологія",  () => GuiHandle_MenuClick("stomatology")),
+    uiText("Операційна", () => GuiHandle_MenuClick("operation")),
     uiBack("main")
 ]
 
 stomatologyComponents := [
-    uiText("Огляд | 10k"),
+    uiTitle("Стоматологія")
+    uiText("Огляд | 10k", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothCheck)),
     uiText("Пломбування | 20k"),
-    uiText("Огляд. Установ. брекетів"),
+    uiText("Огляд. Установ. брекетів",  () => GuiHandle_ClickAndHide(Medic_Stomatology_BracketCheck)),
     uiText("Установка беркетів | 75k"),
-    uiText("Професійна чистка"),
-    uiText("Видалення зуба | 35k"),
-    uiText("Онтопантомограма"),
+    uiText("Професійна чистка",  () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothCleaning)),
+    uiText("Видалення зуба | 35k", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothRemoval)),
+    uiText("Онтопантомограма", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothXRay)),
+    uiBack("surgeon")
 ]
 
 analysisComponents := [
-    uiText("Аналіз Крові"),
+    uiTitle("Дослідження")
+    uiText("Аналіз Крові", () => GuiHandle_ClickAndHide(Medic_Analysis_Blood)),
     uiText("Флюорографія"),
     uiText("Рентген"),
     uiText("ДНК Тест"),
+    uiText("МРТ"),
+    uiBack("surgeon")
+]
+
+operationComponents := [
+    uiTitle("Операційна")
+    uiText("Пластична операція | 200k", () => GuiHandle_ClickAndHide(Medic_Surgery_Plastic())),
+    uiBack("surgeon")
+]
+
+oftalmologyComponents := [
+    uiTitle("Офтальмологія")
+    uiText("Перевірка очного дна праве око | 7.5k", () => GuiHandle_ClickAndHide(Medic_Oculist_RightEyeCheck)),
+    uiText("Перевірка очного дна ліве око | 7.5k", () => GuiHandle_ClickAndHide(Medic_Oculist_LeftEyeCheck)),
+    uiBack("surgeon")
+]
+
+musicComponents := [
+    uiTitle("Музика"),
+    uiText("Mashle and Mucles Intro", () => GuiHandle_ClickAndSend("https://audio.jukehost.co.uk/rfBTjOGmE5fWNIyP4Gb7BhOeYjpGOFck")),
+    uiText("Royel Otis - Murder on the dancefloor", () => GuiHandle_ClickAndSend("https://audio.jukehost.co.uk/0IhrREN0Sx40JrlWTb5sP5s5WLHxqMaI")),
+    uiText("Metallica - Playlist", () => GuiHandle_ClickAndSend("https://audio.jukehost.co.uk/PcV56mwN95FdoNAbNbxRtzFKGIZRKocq")),
+    uiText("Synthwave Retro - Playlist", () => GuiHandle_ClickAndSend("https://audio.jukehost.co.uk/IYGPz6HlkjZKruhQDnceJeGcUGDvw04S")),
+    uiText("", () => GuiHandle_ClickAndSend("")),
+    uiBack("main")
 ]
 
 emojiComponents := [
@@ -129,6 +158,31 @@ global menus := Map(
     ),
     "surgeon", Map(
         "components", surgeonComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "analysis", Map(
+        "components", analysisComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "operation", Map(
+        "components", operationComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "oftalmology", Map(
+        "components", oftalmologyComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "music", Map(
+        "components", musicComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "stomatology", Map(
+        "components", stomatologyComponents,
         "gui", 0,
         "isVisible", false
     ),
@@ -362,6 +416,7 @@ GuiHandle_ClickAndHide(func) {
     func.Call()
 }
 
+
 ; ====================================================================
 ; Makes game active and calls a function
 ;
@@ -372,12 +427,11 @@ GuiHandle_ClickAndActive(func) {
 }
 
 
-GuiHandle_ShowBadge() {
+; ====================================================================
+; Hides menu and sends a message
+;
+GuiHandle_ClickAndSend(message) {
     activateAndHideMenu()
-    Medic_ShowBadge()   
-}
-
-GuiHandle_CantFindABody() {
-    activateAndHideMenu()
-    Medic_CantFindABody()
+    Sleep(100)
+    SendInput(message)
 }

@@ -184,6 +184,14 @@ Chat_Try(message) {
 
 
 ; ====================================================================
+; Sends a message into the game OOC chat starting with /b
+;
+Chat_OOC(message) {
+    Chat_Say("/b " . message)
+}
+
+
+; ====================================================================
 ; Sends a message into the game chat
 Chat_Say(message)
 {

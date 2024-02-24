@@ -19,14 +19,52 @@ PlainTextSay(variationsArray) {
     {
         map := variation[A_Index]
 
-        if map["delay_before"] > 0
-            Sleep(map["delay_before"])
-
-        Chat_Say(map["text"])
-
-        if map["delay_after"] > 0
-            Sleep(map["delay_after"])
+       if (map["type"] == "text") {
+            PlainPlayText(map)    
+       }
+       else if (map["type"] == "delay") {
+            PlainPlayDelay(map)
+       } else if (map["type"] == "screenshot") {
+            PlainPlayScreenshot(map)
+       }
     }
+}
+
+
+; ====================================================================
+; Plays text variation
+;
+PlainPlayText(map) {
+    if map["delay_before"] > 0
+        Sleep(map["delay_before"])
+
+    Chat_Say(map["text"])
+
+    if map["delay_after"] > 0
+        Sleep(map["delay_after"])
+}
+
+
+; ====================================================================
+; Plays delay variation
+;
+PlainPlayDelay(map) {
+    if map["delay_before"] > 0
+        Sleep(map["delay_before"])
+}
+
+
+; ====================================================================
+; Plays screenshot variation
+;
+PlainPlayScreenshot(map) {
+    if map["delay_before"] > 0
+        Sleep(map["delay_before"])
+
+    Take_ScreenShot()
+
+    if map["delay_after"] > 0
+        Sleep(map["delay_after"])
 }
 
 
@@ -158,10 +196,190 @@ Medic_MedCard_Sign(){
     PlainTextSay(MED_CARD_SIGN_VARIATIONS)
 }
 
+
 ; ====================================================================
 ; Plays random text variation while can't find a body on acident
 ;
 Medic_CantFindABody(){
-    Log("CantFindABody triggered")
+    Log("Medic_CantFindABody triggered")
     PlainTextSay(CANT_FIND_A_BODY_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for blood analysis and shows result
+;
+Medic_Analysis_Blood() {
+    Log("Medic_Analysis_Blood triggered")
+    PlainTextSay(ANALYSIS_BLOOD_VARIATIONS)
+    Sleep(1000)
+
+    ; Hb
+    gemoglobin_min := 12.1
+    gemoglobin_max := 17.2
+    gemoglobin_min_v := 10.0
+    gemoglobin_max_v := 20.0
+
+    gemoglobin_value := Random(gemoglobin_min_v * 10, gemoglobin_max_v * 10) / 10.0
+    gemoglobin_result := "Норма"
+
+    if (gemoglobin_value > gemoglobin_max) {
+        gemoglobin_result := "більше норми: Гіпергемія - недостатня гідратація організму"
+    } else if (gemoglobin_value < gemoglobin_min){
+        gemoglobin_result := "менше норми: Залізодефіцитна анемія/мало вітаміну B12"
+    }
+
+    gemoglobin_text := "Гемоглобін (Hb): " gemoglobin_value "г/дл (" gemoglobin_min " - " gematocrit_max ") - " gemoglobin_result
+
+    ; RBC
+    eretrotzit_min := 3.9
+    eretrotzit_max := 5.72
+    eretrotzit_min_v := 3.0
+    eretrotzit_max_v := 6.5
+
+    eretrotzit_value := Random(eretrotzit_min_v * 10, eretrotzit_max_v * 10) / 10.0
+    eretrotzit_result := "Норма"
+
+    if (eretrotzit_value > eretrotzit_max) {
+        eretrotzit_result := "більше норми: Гіпергемія - недостатня гідратація організму" ;гіпергемія
+    } else if (eretrotzit_value < eretrotzit_min){
+        eretrotzit_result := "Анемія: Залізодефіцит/мало вітаміну B12" ;анемія
+    }
+
+    eretrotzit_text := "Еритроцити (RBC): " eretrotzit_value "млн/мкл (" eretrotzit_min " - " eretrotzit_max ") - " eretrotzit_result
+
+    ; WBC
+    leikozit_min := 4.5
+    leikozit_max := 11.0
+    leikozit_min_v := 4.0
+    leikozit_max_v := 12.0
+
+    leikozit_value := Random(leikozit_min_v * 10, leikozit_max_v * 10) / 10.0
+    leikozit_result := "Норма"
+
+    if (leikozit_value > leikozit_max) {
+        leikozit_result := "Лейкоцитоз: Інфекція/Стрес/Алергія" ; лейкоцитоз
+    } else if (leikozit_value < leikozit_min){
+        leikozit_result := "Лейкопенія: Інфекція/Препарати" ; лейкопенія
+    }
+
+    leikozit_text := "Лейкоцити (WBC): " leikozit_value "тис./мкл (" leikozit_min " - " leikozit_max ") - " leikozit_result
+
+    ; PLT
+    trombozit_min := 150
+    trombozit_max := 450
+    trombozit_min_v := 100
+    trombozit_max_v := 550
+
+    trombozit_value := Random(trombozit_min_v * 10, trombozit_max_v * 10) / 10.0
+    trombozit_result := "Норма"
+
+    if (trombozit_value > trombozit_max) {
+        trombozit_result := "Tромбоцитоз: Травми/Запальні захворювання" ; тромбоцитоз
+    } else if (trombozit_value < trombozit_min){
+        trombozit_result := "Tромбоцитопенія: Хрон. Хвороби/Препарати" ; тромбоцитопенія
+    }
+
+    trombozit_text := "Тромбоцити (PLT): " trombozit_value "тис./мкл (" trombozit_min " - " trombozit_max ") - " trombozit_result
+
+    ; Hct
+    gematocrit_min := 35
+    gematocrit_max := 49
+    gematocrit_min_v := 33
+    gematocrit_max_v := 52
+
+    gematocrit_value := Random(gematocrit_min_v, gematocrit_max_v )
+    gematocrit_result := "Норма"
+
+    if (gematocrit_value > gematocrit_max) {
+        gematocrit_result := "Первинна поліцитемія" ; поліцитемія
+    } else if (gematocrit_value < gematocrit_min){
+        gematocrit_result := "Анемія: Залізодефіцитн/мало вітаміну B12" ; анемія
+    }
+
+    gematocrit_text := "Гематокрит (Hct): " gematocrit_value "% (" gematocrit_min " - " gematocrit_max ") - " gematocrit_result
+
+    Chat_OOC(gemoglobin_text)
+    Sleep(750)
+    Chat_OOC(eretrotzit_text)
+    Sleep(750)
+    Chat_OOC(leikozit_text)
+    Sleep(750)
+    Chat_OOC(trombozit_text)
+    Sleep(750)
+    Chat_OOC(gematocrit_text)
+    Sleep(150)
+    Take_ScreenShot()
+}
+
+
+; ====================================================================
+; Plays random text variation for plastic surgery
+;
+Medic_Surgery_Plastic() {
+    Log("Medic_Surgery_Plastic triggered")
+    PlainTextSay(PLASCTIC_SURGERY_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for oculist right eye check
+;
+Medic_Oculist_RightEyeCheck() {
+    Log("Medic_Oculist_RightEyeCheck triggered")
+    PlainTextSay(OCULIST_RIGHT_EYE_CHECK_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for oculist right eye check
+;
+Medic_Oculist_LeftEyeCheck() {
+    Log("Medic_Oculist_LeftEyeCheck triggered")
+    PlainTextSay(OCULIST_LEFT_EYE_CHECK_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for stomatology tooth check
+;
+Medic_Stomatology_ToothCheck() {
+    Log("Medic_Stomatology_ToothCheck triggered")
+    PlainTextSay(STOMATOLOGY_TOOTH_CHECK_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for stomatology bracket check
+;
+Medic_Stomatology_BracketCheck() {
+    Log("Medic_Stomatology_BracketCheck triggered")
+    PlainTextSay(STOMATOLOGY_BRACKETS_CHECK_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for stomatology tooth cleaning
+;
+Medic_Stomatology_ToothCleaning() {
+    Log("Medic_Stomatology_ToothCleaning triggered")
+    PlainTextSay(STOMATOLOGY_TOOTH_CLEANING_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for stomatology tooth removal
+;
+Medic_Stomatology_ToothRemoval() {
+    Log("Medic_Stomatology_ToothRemoval triggered")
+    PlainTextSay(STOMATOLOGY_TOOTH_REMOVAL_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for stomatology tooth X-RAY
+;
+Medic_Stomatology_ToothXRay() {
+    Log("Medic_Stomatology_ToothXRay triggered")
+    PlainTextSay(STOMATOLOGY_TOOTH_X_RAY)
 }
