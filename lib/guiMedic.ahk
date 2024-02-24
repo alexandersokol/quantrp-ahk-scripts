@@ -21,7 +21,7 @@ mainMenuComponents := [
     uiText("Мед. карта", () => GuiHandle_MenuClick("medcard")),
     uiText("Прайс лист", () => GuiHandle_MenuClick("prices")),
     uiText("Хірургія", () => GuiHandle_MenuClick("surgeon")),
-    uiText("Музика", () => GuiHandle_MenuClick("music"))
+    uiText("Музика", () => GuiHandle_MenuClick("music")),
     uiText("Скріншот", () => GuiHandle_ClickAndHide(Take_ScreenShot)),
     uiDivider(),
     uiText("Закрити", () => hideAllMenus())
@@ -72,7 +72,7 @@ surgeonComponents := [
     uiText("Проктологія"),
     uiText("Урологія"),
     uiText("Отоларингологія"),
-    uiText("Офтальмологія", () => GuiHandle_MenuClick("analysis")),
+    uiText("Офтальмологія", () => GuiHandle_MenuClick("oftalmology")),
     uiText("Наркологія"),
     uiText("Стоматологія",  () => GuiHandle_MenuClick("stomatology")),
     uiText("Операційна", () => GuiHandle_MenuClick("operation")),
@@ -80,7 +80,7 @@ surgeonComponents := [
 ]
 
 stomatologyComponents := [
-    uiTitle("Стоматологія")
+    uiTitle("Стоматологія"),
     uiText("Огляд | 10k", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothCheck)),
     uiText("Пломбування | 20k"),
     uiText("Огляд. Установ. брекетів",  () => GuiHandle_ClickAndHide(Medic_Stomatology_BracketCheck)),
@@ -92,7 +92,7 @@ stomatologyComponents := [
 ]
 
 analysisComponents := [
-    uiTitle("Дослідження")
+    uiTitle("Дослідження"),
     uiText("Аналіз Крові", () => GuiHandle_ClickAndHide(Medic_Analysis_Blood)),
     uiText("Флюорографія"),
     uiText("Рентген"),
@@ -102,13 +102,13 @@ analysisComponents := [
 ]
 
 operationComponents := [
-    uiTitle("Операційна")
+    uiTitle("Операційна"),
     uiText("Пластична операція | 200k", () => GuiHandle_ClickAndHide(Medic_Surgery_Plastic())),
     uiBack("surgeon")
 ]
 
 oftalmologyComponents := [
-    uiTitle("Офтальмологія")
+    uiTitle("Офтальмологія"),
     uiText("Перевірка очного дна праве око | 7.5k", () => GuiHandle_ClickAndHide(Medic_Oculist_RightEyeCheck)),
     uiText("Перевірка очного дна ліве око | 7.5k", () => GuiHandle_ClickAndHide(Medic_Oculist_LeftEyeCheck)),
     uiBack("surgeon")
