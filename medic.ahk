@@ -6,6 +6,7 @@
 #Include "lib\guiMedic.ahk"
 
 Persistent true
+
 requestAdminRights()
 
 #HotIf IsGameActive()
