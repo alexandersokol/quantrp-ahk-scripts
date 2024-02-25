@@ -438,3 +438,57 @@ Medic_Otalaryngology_Otoscopy() {
     Log("Medic_Otalaryngology_Endoscopy triggered")
     PlainTextSay(OTOLARYNGOLOGY_ENDOSCOPY)
 }
+
+
+; ====================================================================
+; Plays random text variation for gynecology prepare
+;
+Medic_Gynecology_Prepare() {
+    Log("Medic_Gynecology_Prepare triggered")
+    PlainTextSay(GYNECOLOGY_PREPARE_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology analysis
+;
+Medic_Gynecology_Analysis() {
+    Log("Medic_Gynecology_Analysis triggered")
+    PlainTextSay(GYNECOLOGY_ANALISYS_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology ultrasonic start analysis
+;
+Medic_Gynecology_UltrasonicStart_Analysis() {
+    Log("Medic_Gynecology_Ultrasonic_Analysis triggered")
+    PlainTextSay(GYNECOLOGY_ULTRASONIC_START_ANALISYS_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology pregnancy results analysis
+;
+Medic_Gynecology_Ultrasonic_Pregnancy_Analysis() {
+    Log("Medic_Gynecology_Ultrasonic_Pregnancy_Analysis( triggered")
+    PlainTextSay(GYNECOLOGY_ULTRASONIC_ANALISYS_PREGNANCY_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology pathology results analysis
+;
+Medic_Gynecology_Ultrasonic_Pathology_Analysis() {
+    Log("Medic_Gynecology_Ultrasonic_Pregnancy_Analysis( triggered")
+    PlainTextSay(GYNECOLOGY_ULTRASONIC_ANALISYS_PATHOLOGY_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology ultrasonic finish analysis
+;
+Medic_Gynecology_UltrasonicFinish_Analysis() {
+    Log("Medic_Gynecology_UltrasonicFinish_Analysis triggered")
+    PlainTextSay(GYNECOLOGY_ULTRASONIC_FINISH_ANALISYS_VARIATIONS)
+}

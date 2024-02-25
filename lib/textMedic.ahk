@@ -818,6 +818,138 @@ OTOLARYNGOLOGY_OTOSCOPY := [
 
 
 ; ====================================================================
+; Array with text variations for gynecology check variations
+;
+GYNECOLOGY_PREPARE_VARIATIONS := [
+    [
+        text("/me підійшов до раковини та ретельно вимив руки"),
+        text("/do На столі стоять стерильні сухі серветки"),
+        text("/me взяв серветку та витер руки"),
+        text("/do На столі поряд з раковиною стоїть упаковка з новими рукавичками, та одноразовими масками для обличчя"),
+        text("/me взяв рукавички в руки та одягнув їх"),
+        text("/me взяв стерильну маску зі столу та одягнув її на обличчя"),
+        text("/do Лікар використав антисептик щоб обробити руки в рукавичках"),
+        screenshot(),
+    ]
+]
+
+
+; ====================================================================
+; Array with text variations for gynecology check variations
+;
+GYNECOLOGY_PREPARE_VARIATIONS := [
+    [
+        text("/me підійшов до раковини та ретельно вимив руки"),
+        text("/do На столі стоять стерильні сухі серветки", 2000),
+        text("/me взяв серветку та витер руки", 3000),
+        screenshot(),
+        text("/do На столі поряд з раковиною стоїть упаковка з новими рукавичками, та одноразовими масками для обличчя", 2000),
+        text("/me взяв рукавички в руки та одягнув їх", 3000),
+        text("/me взяв стерильну маску зі столу та одягнув її на обличчя", 2000),
+        text("/do Лікар використав антисептик щоб обробити руки в рукавичках", 3000),
+        screenshot(),
+    ]
+]
+
+
+; ====================================================================
+; Array with text variations for gynecology analysis variations
+;
+GYNECOLOGY_ANALISYS_VARIATIONS := [
+    [
+        text("/do На столику лежать інструменти для гінекологічного огляду, спеціальні дзеркала, шпатель для взяття мазків, гінекологічні щипці"),
+        text("/me взяв гінекологічне дзеркало та змастив гелем", 2000),
+        text("/me обережно ввів дзеркало у вагіну", 2000),
+        text("/do Дзеркало розташоване правильно", 2000),
+        screenshot(),
+        text("/me взяв зі столика гінекологічний шпатель", 2000),
+        text("/me обережно зібрав клітини з поверхні шийки матки та внутрішньої частини шийки", 2000),
+        text("/me наніс зібраний матеріал на предметне скельце", 2000),
+        text("/do Зразки дослідження зібрано", 2000),
+        screenshot(),
+    ]
+]
+
+
+; ====================================================================
+; Array with text variations for gynecology ultrasonic start analysis variations
+;
+GYNECOLOGY_ULTRASONIC_START_ANALISYS_VARIATIONS := [
+    [
+        text("/do Апарат УЗД увімкнено"),
+        text("/me взяв банку з гелем в руку", 2000),
+        text("/me видавив невелику кількість на низ живота пацієнтки", 2000),
+        text("/me взяв датчик для проведення УЗД в праву руку", 2000),
+        text("/me поклав датчик пацієнтці на живіт, та почала дослідження", 2000),
+        text("/do Лікар водить датчиком по животу, детально вивчаючи зображення на апараті", 2000),
+        screenshot(),
+    ]
+]
+
+
+; ====================================================================
+; Array with text variations for gynecology ultrasonic analysis pregnancy variations
+;
+GYNECOLOGY_ULTRASONIC_ANALISYS_PREGNANCY_VARIATIONS := [
+    [
+        text("/try вагітність виявлено", 500, 200),
+        screenshot(),
+    ]
+]
+
+
+; ====================================================================
+; Array with text variations for gynecology ultrasonic analysis pathology variations
+;
+GYNECOLOGY_ULTRASONIC_ANALISYS_PATHOLOGY_VARIATIONS := [
+    [
+        text("/try патологію виявлено", 500, 200),
+        screenshot(),
+    ]
+]
+
+
+; ====================================================================
+; Array with text variations for gynecology ultrasonic finish analysis variations
+;
+GYNECOLOGY_ULTRASONIC_FINISH_ANALISYS_VARIATIONS := [
+    [
+        text("/do Серветки лежать поруч з апаратом УЗД"),
+        text("/me взяв серветки та витерла датчик від залишків гелю", 2000),
+        text("/me поставив датчик назад на апарат УЗД", 2000),
+        text("/me передав серветки пацієнтці", 2000),
+        text("/do Пацієнтка витерла гель із живота", 2000),
+        screenshot(),
+    ]
+]
+
+
+; ====================================================================
+; Array with text variations for 
+;
+EMPTY := [
+    [
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        text(""),
+        screenshot(),
+    ]
+]
+
+
+; ====================================================================
 ; Creates a map with defined text, delay_before and delay_after
 ;
 text(text, delay_before := 0, delay_after := 0) {

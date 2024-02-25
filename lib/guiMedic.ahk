@@ -68,7 +68,7 @@ pricesMenuComponents := [
 surgeonComponents := [
     uiTitle("Хірургія"),
     uiText("Дослідження", () => GuiHandle_MenuClick("analysis")),
-    uiText("Гінекологія"),
+    uiText("Гінекологія", () => GuiHandle_MenuClick("gynecology")),
     uiText("Проктологія"),
     uiText("Урологія"),
     uiText("Отоларингологія", () => GuiHandle_MenuClick("otolaryngology")),
@@ -120,6 +120,17 @@ otolaryngologyComponents := [
     uiText("Риноскопія (Ніс)", () => GuiHandle_ClickAndHide(Medic_Otalaryngology_Rhinoscopy)),
     uiText("Ендоскопія (Горло)", () => GuiHandle_ClickAndHide(Medic_Otalaryngology_Endoscopy)),
     uiText("Отоскопія (вухо)", () => GuiHandle_ClickAndHide(Medic_Otalaryngology_Otoscopy)),
+    uiBack("surgeon")
+]
+
+gynecologyComponents := [
+    uiTitle("Гінекологія"),
+    uiText("Підготовка до огляду", () => GuiHandle_ClickAndHide(Medic_Gynecology_Prepare)),
+    uiText("Аналізи", () => GuiHandle_ClickAndHide(Medic_Gynecology_Analysis)),
+    uiText("УЗД дослідження", () => GuiHandle_ClickAndHide(Medic_Gynecology_UltrasonicStart_Analysis)),
+    uiText("Вагітність", () => GuiHandle_ClickAndHide(Medic_Gynecology_Ultrasonic_Pregnancy_Analysis)),
+    uiText("Патологія", () => GuiHandle_ClickAndHide(Medic_Gynecology_Ultrasonic_Pathology_Analysis)),
+    uiText("Кінець дослідження УЗД", () => GuiHandle_ClickAndHide(Medic_Gynecology_UltrasonicFinish_Analysis)),
     uiBack("surgeon")
 ]
 
@@ -187,6 +198,11 @@ global menus := Map(
     ),
     "otolaryngology", Map(
         "components", otolaryngologyComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "gynecology", Map(
+        "components", gynecologyComponents,
         "gui", 0,
         "isVisible", false
     ),
