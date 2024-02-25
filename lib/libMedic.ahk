@@ -61,6 +61,7 @@ PlainPlayScreenshot(map) {
     if map["delay_before"] > 0
         Sleep(map["delay_before"])
 
+    Sleep(200)
     Take_ScreenShot()
 
     if map["delay_after"] > 0
@@ -314,6 +315,15 @@ Medic_Analysis_Blood() {
 
 
 ; ====================================================================
+; Plays random text variation for blood pressure check
+;
+Medic_Analysis_BloodPressure() {
+    Log("Medic_Analysis_BloodPressure")
+    PlainTextSay(ANALYSIS_BLOOD_PRESSURE_VARIATIONS)
+}
+
+
+; ====================================================================
 ; Plays random text variation for plastic surgery
 ;
 Medic_Surgery_Plastic() {
@@ -382,6 +392,105 @@ Medic_Stomatology_ToothRemoval() {
 Medic_Stomatology_ToothXRay() {
     Log("Medic_Stomatology_ToothXRay triggered")
     PlainTextSay(STOMATOLOGY_TOOTH_X_RAY)
+}
+
+
+; ====================================================================
+; Plays random text variation for stomatology brackets setup
+;
+Medic_Stomatology_BracketSetups() {
+    Log("Medic_Stomatology_BracketSetup triggered")
+    PlainTextSay(STOMATOLOGY_BRACKETS_SETUP)
+}
+
+
+; ====================================================================
+; Plays random text variation for stomatology tooth heal
+;
+Medic_Stomatology_ToothHeal() {
+    Log("Medic_Stomatology_ToothHeal triggered")
+    PlainTextSay(STOMATOLOGY_TOOTH_HEAL)
+}
+
+
+; ====================================================================
+; Plays random text variation for otaryngology rhinoscopy
+;
+Medic_Otalaryngology_Rhinoscopy() {
+    Log("Medic_Otalaryngology_Rhinoscopy triggered")
+    PlainTextSay(OTOLARYNGOLOGY_RHINOSCOPY)
+}
+
+
+; ====================================================================
+; Plays random text variation for otaryngology endocscopy
+;
+Medic_Otalaryngology_Endoscopy() {
+    Log("Medic_Otalaryngology_Endoscopy triggered")
+    PlainTextSay(OTOLARYNGOLOGY_ENDOSCOPY)
+}
+
+
+; ====================================================================
+; Plays random text variation for otaryngology otoscopy
+;
+Medic_Otalaryngology_Otoscopy() {
+    Log("Medic_Otalaryngology_Endoscopy triggered")
+    PlainTextSay(OTOLARYNGOLOGY_ENDOSCOPY)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology prepare
+;
+Medic_Gynecology_Prepare() {
+    Log("Medic_Gynecology_Prepare triggered")
+    PlainTextSay(GYNECOLOGY_PREPARE_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology analysis
+;
+Medic_Gynecology_Analysis() {
+    Log("Medic_Gynecology_Analysis triggered")
+    PlainTextSay(GYNECOLOGY_ANALISYS_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology ultrasonic start analysis
+;
+Medic_Gynecology_UltrasonicStart_Analysis() {
+    Log("Medic_Gynecology_Ultrasonic_Analysis triggered")
+    PlainTextSay(GYNECOLOGY_ULTRASONIC_START_ANALISYS_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology pregnancy results analysis
+;
+Medic_Gynecology_Ultrasonic_Pregnancy_Analysis() {
+    Log("Medic_Gynecology_Ultrasonic_Pregnancy_Analysis( triggered")
+    PlainTextSay(GYNECOLOGY_ULTRASONIC_ANALISYS_PREGNANCY_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology pathology results analysis
+;
+Medic_Gynecology_Ultrasonic_Pathology_Analysis() {
+    Log("Medic_Gynecology_Ultrasonic_Pregnancy_Analysis( triggered")
+    PlainTextSay(GYNECOLOGY_ULTRASONIC_ANALISYS_PATHOLOGY_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for gynecology ultrasonic finish analysis
+;
+Medic_Gynecology_UltrasonicFinish_Analysis() {
+    Log("Medic_Gynecology_UltrasonicFinish_Analysis triggered")
+    PlainTextSay(GYNECOLOGY_ULTRASONIC_FINISH_ANALISYS_VARIATIONS)
 }
 
 ; ====================================================================

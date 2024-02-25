@@ -68,10 +68,10 @@ pricesMenuComponents := [
 surgeonComponents := [
     uiTitle("Хірургія"),
     uiText("Дослідження", () => GuiHandle_MenuClick("analysis")),
-    uiText("Гінекологія"),
+    uiText("Гінекологія", () => GuiHandle_MenuClick("gynecology")),
     uiText("Проктологія"),
     uiText("Урологія"),
-    uiText("Отоларингологія"),
+    uiText("Отоларингологія", () => GuiHandle_MenuClick("otolaryngology")),
     uiText("Офтальмологія", () => GuiHandle_MenuClick("oftalmology")),
     uiText("Наркологія"),
     uiText("Стоматологія",  () => GuiHandle_MenuClick("stomatology")),
@@ -82,9 +82,9 @@ surgeonComponents := [
 stomatologyComponents := [
     uiTitle("Стоматологія"),
     uiText("Огляд | 10k", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothCheck)),
-    uiText("Пломбування | 20k"),
+    uiText("Пломбування | 20k", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothHeal)),
     uiText("Огляд. Установ. брекетів",  () => GuiHandle_ClickAndHide(Medic_Stomatology_BracketCheck)),
-    uiText("Установка беркетів | 75k"),
+    uiText("Установка беркетів | 75k", () => GuiHandle_ClickAndHide(Medic_Stomatology_BracketSetups)),
     uiText("Професійна чистка",  () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothCleaning)),
     uiText("Видалення зуба | 35k", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothRemoval)),
     uiText("Онтопантомограма", () => GuiHandle_ClickAndHide(Medic_Stomatology_ToothXRay)),
@@ -94,6 +94,7 @@ stomatologyComponents := [
 analysisComponents := [
     uiTitle("Дослідження"),
     uiText("Аналіз Крові", () => GuiHandle_ClickAndHide(Medic_Analysis_Blood)),
+    uiText("Перевірка тиску", () => GuiHandle_ClickAndHide(Medic_Analysis_BloodPressure)),
     uiText("Флюорографія"),
     uiText("Рентген"),
     uiText("ДНК Тест"),
@@ -109,9 +110,28 @@ operationComponents := [
 ]
 
 oftalmologyComponents := [
-    uiTitle("Офтальмологія"),
-    uiText("Перевірка очного дна праве око | 7.5k", () => GuiHandle_ClickAndHide(Medic_Oculist_RightEyeCheck)),
-    uiText("Перевірка очного дна ліве око | 7.5k", () => GuiHandle_ClickAndHide(Medic_Oculist_LeftEyeCheck)),
+    uiTitle("Офтальмологія | 7.5k"),
+    uiText("Перевірка очного дна праве око", () => GuiHandle_ClickAndHide(Medic_Oculist_RightEyeCheck)),
+    uiText("Перевірка очного дна ліве око", () => GuiHandle_ClickAndHide(Medic_Oculist_LeftEyeCheck)),
+    uiBack("surgeon")
+]
+
+otolaryngologyComponents := [
+    uiTitle("Отоларингологія | 8k"),
+    uiText("Риноскопія (Ніс)", () => GuiHandle_ClickAndHide(Medic_Otalaryngology_Rhinoscopy)),
+    uiText("Ендоскопія (Горло)", () => GuiHandle_ClickAndHide(Medic_Otalaryngology_Endoscopy)),
+    uiText("Отоскопія (вухо)", () => GuiHandle_ClickAndHide(Medic_Otalaryngology_Otoscopy)),
+    uiBack("surgeon")
+]
+
+gynecologyComponents := [
+    uiTitle("Гінекологія"),
+    uiText("Підготовка до огляду", () => GuiHandle_ClickAndHide(Medic_Gynecology_Prepare)),
+    uiText("Аналізи", () => GuiHandle_ClickAndHide(Medic_Gynecology_Analysis)),
+    uiText("УЗД дослідження", () => GuiHandle_ClickAndHide(Medic_Gynecology_UltrasonicStart_Analysis)),
+    uiText("Вагітність", () => GuiHandle_ClickAndHide(Medic_Gynecology_Ultrasonic_Pregnancy_Analysis)),
+    uiText("Патологія", () => GuiHandle_ClickAndHide(Medic_Gynecology_Ultrasonic_Pathology_Analysis)),
+    uiText("Кінець дослідження УЗД", () => GuiHandle_ClickAndHide(Medic_Gynecology_UltrasonicFinish_Analysis)),
     uiBack("surgeon")
 ]
 
@@ -174,6 +194,16 @@ global menus := Map(
     ),
     "oftalmology", Map(
         "components", oftalmologyComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "otolaryngology", Map(
+        "components", otolaryngologyComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "gynecology", Map(
+        "components", gynecologyComponents,
         "gui", 0,
         "isVisible", false
     ),
@@ -307,7 +337,7 @@ appendText(menuGui, component){
     menuGui.SetFont(TEXT_SIZE " " TEXT_COLOR)
     uiComponent := menuGui.Add("Text",,component["text"])
     if (IsObject(component["onClickHandler"])) {
-        uiComponent.OnEvent("Click", (*) => component["onClickHandler"].Call())
+        uiComponent.OnEvent("Click", () => component["onClickHandler"].Call())
     }
 }
 
@@ -330,7 +360,7 @@ appendBack(menuGui, component){
     menuGui.Add("Progress", "h1 " DIVIDER_COLOR " -Smooth", "100")
     uiComponent := menuGui.Add("Text",,component["text"])
     if (IsObject(component["onClickHandler"])) {
-        uiComponent.OnEvent("Click", (*) => component["onClickHandler"].Call())
+        uiComponent.OnEvent("Click", () => component["onClickHandler"].Call())
     }
 }
 
@@ -434,5 +464,5 @@ GuiHandle_ClickAndActive(func) {
 GuiHandle_ClickAndSend(message) {
     activateAndHideMenu()
     Sleep(100)
-    SendInput(message)
+    SendText(message)
 }
