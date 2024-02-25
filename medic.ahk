@@ -9,7 +9,7 @@ Persistent true
 requestAdminRights()
 
 #HotIf IsGameActive()
-    >^R::Chat_Type("`/rb ")         ; LCtrl + R - Open chat and print /rb 
+    >^R::Chat_Type("/rb ")         ; LCtrl + R - Open chat and print /rb 
 
     \::Take_ScreenShot()
     >^q::Medic_ShowBadge()
@@ -17,8 +17,8 @@ requestAdminRights()
     >^-::Medic_SellVitamins()
     >^0::Medic_BloodDonation()
     >^9::Medic_Reanimation()
-    >^h::Chat_Type("`/heal ")
-    >^b::Chat_Type("`/blood ")
+    >^h::Chat_Type("/heal ")
+    >^b::Chat_Type("/blood ")
     XButton1::Medic_ReanimationClick()
 
     >^PgUp::Medic_MedCard_Temperature()

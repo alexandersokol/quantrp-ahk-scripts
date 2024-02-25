@@ -383,3 +383,11 @@ Medic_Stomatology_ToothXRay() {
     Log("Medic_Stomatology_ToothXRay triggered")
     PlainTextSay(STOMATOLOGY_TOOTH_X_RAY)
 }
+
+; ====================================================================
+; Plays random text variation for stomatology tooth X-RAY
+;
+Medic_Surgery_KidneyDonor() {
+    Log("Medic_Stomatology_ToothXRay triggered")
+    PlainTextSay(KIDNEY_DONOR_VARIATIONS)
+}

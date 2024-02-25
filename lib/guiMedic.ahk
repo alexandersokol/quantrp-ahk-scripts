@@ -103,7 +103,8 @@ analysisComponents := [
 
 operationComponents := [
     uiTitle("Операційна"),
-    uiText("Пластична операція | 200k", () => GuiHandle_ClickAndHide(Medic_Surgery_Plastic())),
+    uiText("Пластична операція | 200k", () => GuiHandle_ClickAndHide(Medic_Surgery_Plastic)),
+    uiText("Донор нирки", () => GuiHandle_ClickAndHide(Medic_Surgery_KidneyDonor)),
     uiBack("surgeon")
 ]
 
