@@ -199,7 +199,7 @@ Chat_Say(message)
     Send(BUTTON_OPEN_CHAT)
 
     Sleep(DELAY_MESSAGE_SEND)
-    SendInput(message)
+    SendText(message)
 
     Sleep(DELAY_MESSAGE_SEND)
     Send(BUTTON_SEND_MESSAGE)
@@ -216,7 +216,7 @@ Chat_Type(message) {
     Send(BUTTON_OPEN_CHAT)
 
     Sleep(DELAY_MESSAGE_SEND)
-    SendInput(message)
+    SendText(message)
 
     Log("Chat type: " . message)
 }
@@ -227,7 +227,7 @@ Chat_Type(message) {
 ;
 Chat_ContinueInputAndSend(message) {
     Sleep(DELAY_MESSAGE_SEND)
-    SendInput(message)
+    SendText(message)
 
     Sleep(DELAY_MESSAGE_SEND)
     Send(BUTTON_SEND_MESSAGE)
