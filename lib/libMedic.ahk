@@ -315,6 +315,15 @@ Medic_Analysis_Blood() {
 
 
 ; ====================================================================
+; Plays random text variation for blood pressure check
+;
+Medic_Analysis_BloodPressure() {
+    Log("Medic_Analysis_BloodPressure")
+    PlainTextSay(ANALYSIS_BLOOD_PRESSURE_VARIATIONS)
+}
+
+
+; ====================================================================
 ; Plays random text variation for plastic surgery
 ;
 Medic_Surgery_Plastic() {

@@ -94,6 +94,7 @@ stomatologyComponents := [
 analysisComponents := [
     uiTitle("Дослідження"),
     uiText("Аналіз Крові", () => GuiHandle_ClickAndHide(Medic_Analysis_Blood)),
+    uiText("Перевірка тиску", () => GuiHandle_ClickAndHide(Medic_Analysis_BloodPressure)),
     uiText("Флюорографія"),
     uiText("Рентген"),
     uiText("ДНК Тест"),
