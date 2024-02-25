@@ -402,3 +402,30 @@ Medic_Stomatology_ToothHeal() {
     Log("Medic_Stomatology_ToothHeal triggered")
     PlainTextSay(STOMATOLOGY_TOOTH_HEAL)
 }
+
+
+; ====================================================================
+; Plays random text variation for otaryngology rhinoscopy
+;
+Medic_Otalaryngology_Rhinoscopy() {
+    Log("Medic_Otalaryngology_Rhinoscopy triggered")
+    PlainTextSay(OTOLARYNGOLOGY_RHINOSCOPY)
+}
+
+
+; ====================================================================
+; Plays random text variation for otaryngology endocscopy
+;
+Medic_Otalaryngology_Endoscopy() {
+    Log("Medic_Otalaryngology_Endoscopy triggered")
+    PlainTextSay(OTOLARYNGOLOGY_ENDOSCOPY)
+}
+
+
+; ====================================================================
+; Plays random text variation for otaryngology otoscopy
+;
+Medic_Otalaryngology_Otoscopy() {
+    Log("Medic_Otalaryngology_Endoscopy triggered")
+    PlainTextSay(OTOLARYNGOLOGY_ENDOSCOPY)
+}

@@ -71,7 +71,7 @@ surgeonComponents := [
     uiText("Гінекологія"),
     uiText("Проктологія"),
     uiText("Урологія"),
-    uiText("Отоларингологія"),
+    uiText("Отоларингологія", () => GuiHandle_MenuClick("otolaryngology")),
     uiText("Офтальмологія", () => GuiHandle_MenuClick("oftalmology")),
     uiText("Наркологія"),
     uiText("Стоматологія",  () => GuiHandle_MenuClick("stomatology")),
@@ -108,9 +108,17 @@ operationComponents := [
 ]
 
 oftalmologyComponents := [
-    uiTitle("Офтальмологія"),
-    uiText("Перевірка очного дна праве око | 7.5k", () => GuiHandle_ClickAndHide(Medic_Oculist_RightEyeCheck)),
-    uiText("Перевірка очного дна ліве око | 7.5k", () => GuiHandle_ClickAndHide(Medic_Oculist_LeftEyeCheck)),
+    uiTitle("Офтальмологія | 7.5k"),
+    uiText("Перевірка очного дна праве око", () => GuiHandle_ClickAndHide(Medic_Oculist_RightEyeCheck)),
+    uiText("Перевірка очного дна ліве око", () => GuiHandle_ClickAndHide(Medic_Oculist_LeftEyeCheck)),
+    uiBack("surgeon")
+]
+
+otolaryngologyComponents := [
+    uiTitle("Отоларингологія | 8k"),
+    uiText("Риноскопія (Ніс)", () => GuiHandle_ClickAndHide(Medic_Otalaryngology_Rhinoscopy)),
+    uiText("Ендоскопія (Горло)", () => GuiHandle_ClickAndHide(Medic_Otalaryngology_Endoscopy)),
+    uiText("Отоскопія (вухо)", () => GuiHandle_ClickAndHide(Medic_Otalaryngology_Otoscopy)),
     uiBack("surgeon")
 ]
 
@@ -173,6 +181,11 @@ global menus := Map(
     ),
     "oftalmology", Map(
         "components", oftalmologyComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "otolaryngology", Map(
+        "components", otolaryngologyComponents,
         "gui", 0,
         "isVisible", false
     ),
