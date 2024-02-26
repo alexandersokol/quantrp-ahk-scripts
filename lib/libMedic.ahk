@@ -570,6 +570,24 @@ Medic_Analysis_MRTResults() {
 ; Plays random text variation for analysis MRT Print results
 ;
 Medic_Analysis_MRTPrintResults() {
-    Log("Medic_Analysis_MRTPrintResultstriggered")
+    Log("Medic_Analysis_MRTPrintResults triggered")
     PlainTextSay(ANALYSIS_MRT_PRINT_RESULTS)
+}
+
+
+; ====================================================================
+; Plays random text variation for narcologyst alko test
+;
+Medic_Narcologyst_AlcoTest() {
+    Log("Medic_Narcologyst_AlcoTest triggered")
+    PlainTextSay(NARCOLOGYST_ALKO_TEST)
+}
+
+
+; ====================================================================
+; Plays random text variation for narcologyst alko test
+;
+Medic_Narcologyst_DrugsTest() {
+    Log("Medic_Narcologyst_DrugsTest triggered")
+    PlainTextSay(NARCOLOGYST_DRUGS_TEST)
 }
