@@ -10,14 +10,43 @@ SCREENSHOT_BLOOD_DONATION_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\blood-donation"
 SCREENSHOT_PREMIUM_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\premium"
 
 
+global plainTextPlayInProgress := false
+
+#HotIf plainTextPlayInProgress
+    W::
+    D::
+    E::
+    A::
+    S::
+    1::
+    2::
+    3::
+    4::
+    5::
+    M::
+    N::
+    I::
+    Esc::CancelPlainTextSay()
+#HotIf
+
+
+CancelPlainTextSay(){
+    global plainTextPlayInProgress := false
+}
+
 ; ====================================================================
 ; Plays text variation from given array
 ;
 PlainTextSay(variationsArray) {
+    global plainTextPlayInProgress := true
+
     variation := RandomItem(variationsArray)
     Loop variation.Length
     {
-        map := variation[A_Index]
+       map := variation[A_Index]
+
+       if (!plainTextPlayInProgress)
+        return
 
        if (map["type"] == "text") {
             PlainPlayText(map)    
@@ -28,6 +57,8 @@ PlainTextSay(variationsArray) {
             PlainPlayScreenshot(map)
        }
     }
+
+    global plainTextPlayInProgress := false
 }
 
 
@@ -35,10 +66,21 @@ PlainTextSay(variationsArray) {
 ; Plays text variation
 ;
 PlainPlayText(map) {
+    global plainTextPlayInProgress
+
+    if (!plainTextPlayInProgress)
+        return
+
     if map["delay_before"] > 0
         Sleep(map["delay_before"])
 
+    if (!plainTextPlayInProgress)
+        return
+
     Chat_Say(map["text"])
+
+    if (!plainTextPlayInProgress)
+        return
 
     if map["delay_after"] > 0
         Sleep(map["delay_after"])
@@ -49,6 +91,11 @@ PlainPlayText(map) {
 ; Plays delay variation
 ;
 PlainPlayDelay(map) {
+    global plainTextPlayInProgress
+
+    if (!plainTextPlayInProgress)
+        return
+
     if map["delay_before"] > 0
         Sleep(map["delay_before"])
 }
@@ -58,11 +105,26 @@ PlainPlayDelay(map) {
 ; Plays screenshot variation
 ;
 PlainPlayScreenshot(map) {
+    global plainTextPlayInProgress
+
+    if (!plainTextPlayInProgress)
+        return
+
     if map["delay_before"] > 0
         Sleep(map["delay_before"])
 
+    if (!plainTextPlayInProgress)
+        return
+
     Sleep(200)
+
+    if (!plainTextPlayInProgress)
+        return
+
     Take_ScreenShot()
+
+    if (!plainTextPlayInProgress)
+        return
 
     if map["delay_after"] > 0
         Sleep(map["delay_after"])
@@ -450,6 +512,15 @@ Medic_Gynecology_Prepare() {
 
 
 ; ====================================================================
+; Plays random text variation for gynecology take analysis
+;
+Medic_Gynecology_TakeAnalysis() {
+    Log("Medic_Gynecology_TakeAnalysis triggered")
+    PlainTextSay(GYNECOLOGY_TAKE_ANALISYS_VARIATIONS)
+}
+
+
+; ====================================================================
 ; Plays random text variation for gynecology analysis
 ;
 Medic_Gynecology_Analysis() {
@@ -493,10 +564,155 @@ Medic_Gynecology_UltrasonicFinish_Analysis() {
     PlainTextSay(GYNECOLOGY_ULTRASONIC_FINISH_ANALISYS_VARIATIONS)
 }
 
+
 ; ====================================================================
-; Plays random text variation for stomatology tooth X-RAY
+; Plays random text variation for surgery kidney donor
 ;
 Medic_Surgery_KidneyDonor() {
-    Log("Medic_Stomatology_ToothXRay triggered")
+    Log("Medic_Surgery_KidneyDonor triggered")
     PlainTextSay(KIDNEY_DONOR_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for surgery preparation
+;
+Medic_Surgery_Preparation() {
+    Log("Medic_Surgery_Preparation triggered")
+    PlainTextSay(SURGERY_PREPARATION_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for surgery start
+;
+Medic_Surgery_Start() {
+    Log("Medic_Surgery_Preparation triggered")
+    PlainTextSay(SURGERY_START_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for surgery anasthesia
+;
+Medic_Surgery_Anasthesia() {
+    Log("Medic_Surgery_Anasthesia triggered")
+    PlainTextSay(SURGERY_ANASTHESIA_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for surgery appendix removal
+;
+Medic_Surgery_AppendixRemoval() {
+    Log("Medic_Surgery_AppendixRemoval triggered")
+    PlainTextSay(SURGERY_APPENDIX_REMOVAL)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis MRT Processing
+;
+Medic_Analysis_MRTProcessing() {
+    Log("Medic_Analysis_MRTProcessing triggered")
+    PlainTextSay(ANALYSIS_MRT_PRECESSING)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis MRT Results
+;
+Medic_Analysis_MRTResults() {
+    Log("Medic_Analysis_MRTResults triggered")
+    PlainTextSay(ANALYSIS_MRT_RESULTS)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis MRT Print results
+;
+Medic_Analysis_MRTPrintResults() {
+    Log("Medic_Analysis_MRTPrintResults triggered")
+    PlainTextSay(ANALYSIS_MRT_PRINT_RESULTS)
+}
+
+
+; ====================================================================
+; Plays random text variation for narcologyst alko test
+;
+Medic_Narcologyst_AlcoTest() {
+    Log("Medic_Narcologyst_AlcoTest triggered")
+    PlainTextSay(NARCOLOGYST_ALKO_TEST)
+}
+
+
+; ====================================================================
+; Plays random text variation for narcologyst alko test
+;
+Medic_Narcologyst_DrugsTest() {
+    Log("Medic_Narcologyst_DrugsTest triggered")
+    PlainTextSay(NARCOLOGYST_DRUGS_TEST)
+}
+
+
+; ====================================================================
+; Plays random text variation for proctology insert meds
+;
+Medic_Proctology_InsertMeds() {
+    Log("Medic_Proctology_InsertMeds triggered")
+    PlainTextSay(PROCTOLOGY_INSERT_MEDS)
+}
+
+
+; ====================================================================
+; Plays random text variation for proctology hemorrhoids healing
+;
+Medic_Proctology_HemorrhoidsHealing() {
+    Log("Medic_Proctology_HemorrhoidsHealing triggered")
+    PlainTextSay(PROCTOLOGY_HEMORRHOIDS_HEALING)
+}
+
+
+; ====================================================================
+; Plays random text variation for proctology enema
+;
+Medic_Proctology_ProctologyEnema() {
+    Log("Medic_Proctology_ProctologyEnema triggered")
+    PlainTextSay(PROCTOLOGY_ENEMA)
+}
+
+
+; ====================================================================
+; Plays random text variation for proctology check
+;
+Medic_Proctology_Check() {
+    Log("Medic_Proctology_Check triggered")
+    PlainTextSay(PROCTOLOGY_CHECK)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis fluorography
+;
+Medic_Analysis_Fluorography() {
+    Log("Medic_Analysis_Fluorography triggered")
+    PlainTextSay(ANALYSIS_FLUOROGRAPHY)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis xray
+;
+Medic_Analysis_XRay() {
+    Log("Medic_Analysis_XRay triggered")
+    PlainTextSay(ANALYSIS_X_RAY)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis DNA
+;
+Medic_Analysis_DNA() {
+    Log("Medic_Analysis_DNA triggered")
+    PlainTextSay(ANALYSIS_DNA)
 }

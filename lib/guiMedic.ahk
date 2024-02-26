@@ -69,11 +69,11 @@ surgeonComponents := [
     uiTitle("Хірургія"),
     uiText("Дослідження", () => GuiHandle_MenuClick("analysis")),
     uiText("Гінекологія", () => GuiHandle_MenuClick("gynecology")),
-    uiText("Проктологія"),
-    uiText("Урологія"),
+    uiText("Проктологія", () => GuiHandle_MenuClick("proctology")),
+    uiText("-Урологія"),
     uiText("Отоларингологія", () => GuiHandle_MenuClick("otolaryngology")),
     uiText("Офтальмологія", () => GuiHandle_MenuClick("oftalmology")),
-    uiText("Наркологія"),
+    uiText("Наркологія", () => GuiHandle_MenuClick("narcology")),
     uiText("Стоматологія",  () => GuiHandle_MenuClick("stomatology")),
     uiText("Операційна", () => GuiHandle_MenuClick("operation")),
     uiBack("main")
@@ -95,10 +95,12 @@ analysisComponents := [
     uiTitle("Дослідження"),
     uiText("Аналіз Крові", () => GuiHandle_ClickAndHide(Medic_Analysis_Blood)),
     uiText("Перевірка тиску", () => GuiHandle_ClickAndHide(Medic_Analysis_BloodPressure)),
-    uiText("Флюорографія"),
-    uiText("Рентген"),
-    uiText("ДНК Тест"),
-    uiText("МРТ"),
+    uiText("Флюорографія", () => GuiHandle_ClickAndHide(Medic_Analysis_Fluorography)),
+    uiText("Рентген", () => GuiHandle_ClickAndHide(Medic_Analysis_XRay)),
+    uiText("ДНК Тест", () => GuiHandle_ClickAndHide(Medic_Analysis_DNA)),
+    uiText("МРТ - дослідження", () => GuiHandle_ClickAndHide(Medic_Analysis_MRTProcessing)),
+    uiText("МРТ - результати", () => GuiHandle_ClickAndHide(Medic_Analysis_MRTResults)),
+    uiText("МРТ - друк результатів", () => GuiHandle_ClickAndHide(Medic_Analysis_MRTPrintResults)),
     uiBack("surgeon")
 ]
 
@@ -106,6 +108,10 @@ operationComponents := [
     uiTitle("Операційна"),
     uiText("Пластична операція | 200k", () => GuiHandle_ClickAndHide(Medic_Surgery_Plastic)),
     uiText("Донор нирки", () => GuiHandle_ClickAndHide(Medic_Surgery_KidneyDonor)),
+    uiText("Підготовка", GuiHandle_ClickAndHide(Medic_Surgery_Preparation)),
+    uiText("Загальна анестезія", GuiHandle_ClickAndHide(Medic_Surgery_Anasthesia)),
+    uiText("Початок операції", GuiHandle_ClickAndHide(Medic_Surgery_Start)),
+    uiText("Видалення апендициту", GuiHandle_ClickAndHide(Medic_Surgery_AppendixRemoval)),
     uiBack("surgeon")
 ]
 
@@ -127,11 +133,28 @@ otolaryngologyComponents := [
 gynecologyComponents := [
     uiTitle("Гінекологія"),
     uiText("Підготовка до огляду", () => GuiHandle_ClickAndHide(Medic_Gynecology_Prepare)),
-    uiText("Аналізи", () => GuiHandle_ClickAndHide(Medic_Gynecology_Analysis)),
+    uiText("Мазок на аналіз", () => GuiHandle_ClickAndHide(Medic_Gynecology_TakeAnalysis)),
+    uiText("Аналіз мазку", () => GuiHandle_ClickAndHide(Medic_Gynecology_Analysis)),
     uiText("УЗД дослідження", () => GuiHandle_ClickAndHide(Medic_Gynecology_UltrasonicStart_Analysis)),
     uiText("Вагітність", () => GuiHandle_ClickAndHide(Medic_Gynecology_Ultrasonic_Pregnancy_Analysis)),
     uiText("Патологія", () => GuiHandle_ClickAndHide(Medic_Gynecology_Ultrasonic_Pathology_Analysis)),
     uiText("Кінець дослідження УЗД", () => GuiHandle_ClickAndHide(Medic_Gynecology_UltrasonicFinish_Analysis)),
+    uiBack("surgeon")
+]
+
+narcologyComponents := [
+    uiTitle("Наркологія"),
+    uiText("Алкотест", () => GuiHandle_ClickAndHide(Medic_Narcologyst_AlcoTest)),
+    uiText("Наркотест", () => GuiHandle_ClickAndHide(Medic_Narcologyst_DrugsTest)),
+    uiBack("surgeon")
+]
+
+proctologyComponents := [
+    uiTitle("Проктологія"),
+    uiText("Огляд", () => GuiHandle_ClickAndHide(Medic_Proctology_Check)),
+    uiText("Свічка", () => GuiHandle_ClickAndHide(Medic_Proctology_InsertMeds)),
+    uiText("Видалення геморою", () => GuiHandle_ClickAndHide(Medic_Proctology_HemorrhoidsHealing)),
+    uiText("Клізма", () => GuiHandle_ClickAndHide(Medic_Proctology_ProctologyEnema)),
     uiBack("surgeon")
 ]
 
@@ -213,6 +236,16 @@ global menus := Map(
         "isVisible", false
     ),
     "stomatology", Map(
+        "components", stomatologyComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "narcology", Map(
+        "components", stomatologyComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "proctology", Map(
         "components", stomatologyComponents,
         "gui", 0,
         "isVisible", false
