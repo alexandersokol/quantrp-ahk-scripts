@@ -106,6 +106,10 @@ operationComponents := [
     uiTitle("Операційна"),
     uiText("Пластична операція | 200k", () => GuiHandle_ClickAndHide(Medic_Surgery_Plastic)),
     uiText("Донор нирки", () => GuiHandle_ClickAndHide(Medic_Surgery_KidneyDonor)),
+    uiText("Підготовка", GuiHandle_ClickAndHide(Medic_Surgery_Preparation)),
+    uiText("Загальна анестезія", GuiHandle_ClickAndHide(Medic_Surgery_Anasthesia)),
+    uiText("Початок операції", GuiHandle_ClickAndHide(Medic_Surgery_Start)),
+    uiText("Видалення апендициту", GuiHandle_ClickAndHide(Medic_Surgery_AppendixRemoval)),
     uiBack("surgeon")
 ]
 
@@ -127,7 +131,8 @@ otolaryngologyComponents := [
 gynecologyComponents := [
     uiTitle("Гінекологія"),
     uiText("Підготовка до огляду", () => GuiHandle_ClickAndHide(Medic_Gynecology_Prepare)),
-    uiText("Аналізи", () => GuiHandle_ClickAndHide(Medic_Gynecology_Analysis)),
+    uiText("Мазок на аналіз", () => GuiHandle_ClickAndHide(Medic_Gynecology_TakeAnalysis)),
+    uiText("Аналіз мазку", () => GuiHandle_ClickAndHide(Medic_Gynecology_Analysis)),
     uiText("УЗД дослідження", () => GuiHandle_ClickAndHide(Medic_Gynecology_UltrasonicStart_Analysis)),
     uiText("Вагітність", () => GuiHandle_ClickAndHide(Medic_Gynecology_Ultrasonic_Pregnancy_Analysis)),
     uiText("Патологія", () => GuiHandle_ClickAndHide(Medic_Gynecology_Ultrasonic_Pathology_Analysis)),

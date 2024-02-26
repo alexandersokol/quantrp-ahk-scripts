@@ -450,6 +450,15 @@ Medic_Gynecology_Prepare() {
 
 
 ; ====================================================================
+; Plays random text variation for gynecology take analysis
+;
+Medic_Gynecology_TakeAnalysis() {
+    Log("Medic_Gynecology_TakeAnalysis triggered")
+    PlainTextSay(GYNECOLOGY_TAKE_ANALISYS_VARIATIONS)
+}
+
+
+; ====================================================================
 ; Plays random text variation for gynecology analysis
 ;
 Medic_Gynecology_Analysis() {
@@ -493,10 +502,47 @@ Medic_Gynecology_UltrasonicFinish_Analysis() {
     PlainTextSay(GYNECOLOGY_ULTRASONIC_FINISH_ANALISYS_VARIATIONS)
 }
 
+
 ; ====================================================================
-; Plays random text variation for stomatology tooth X-RAY
+; Plays random text variation for surgery kidney donor
 ;
 Medic_Surgery_KidneyDonor() {
-    Log("Medic_Stomatology_ToothXRay triggered")
+    Log("Medic_Surgery_KidneyDonor triggered")
     PlainTextSay(KIDNEY_DONOR_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for surgery preparation
+;
+Medic_Surgery_Preparation() {
+    Log("Medic_Surgery_Preparation triggered")
+    PlainTextSay(SURGERY_PREPARATION_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for surgery start
+;
+Medic_Surgery_Start() {
+    Log("Medic_Surgery_Preparation triggered")
+    PlainTextSay(SURGERY_START_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for surgery anasthesia
+;
+Medic_Surgery_Anasthesia() {
+    Log("Medic_Surgery_Anasthesia triggered")
+    PlainTextSay(SURGERY_ANASTHESIA_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for surgery anasthesia
+;
+Medic_Surgery_AppendixRemoval() {
+    Log("Medic_Surgery_AppendixRemoval triggered")
+    PlainTextSay(SURGERY_APPENDIX_REMOVAL)
 }
