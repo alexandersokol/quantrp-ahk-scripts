@@ -689,3 +689,30 @@ Medic_Proctology_Check() {
     Log("Medic_Proctology_Check triggered")
     PlainTextSay(PROCTOLOGY_CHECK)
 }
+
+
+; ====================================================================
+; Plays random text variation for analysis fluorography
+;
+Medic_Analysis_Fluorography() {
+    Log("Medic_Analysis_Fluorography triggered")
+    PlainTextSay(ANALYSIS_FLUOROGRAPHY)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis xray
+;
+Medic_Analysis_XRay() {
+    Log("Medic_Analysis_XRay triggered")
+    PlainTextSay(ANALYSIS_X_RAY)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis DNA
+;
+Medic_Analysis_DNA() {
+    Log("Medic_Analysis_DNA triggered")
+    PlainTextSay(ANALYSIS_DNA)
+}
