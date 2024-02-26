@@ -241,12 +241,12 @@ global menus := Map(
         "isVisible", false
     ),
     "narcology", Map(
-        "components", stomatologyComponents,
+        "components", narcologyComponents,
         "gui", 0,
         "isVisible", false
     ),
     "proctology", Map(
-        "components", stomatologyComponents,
+        "components", proctologyComponents,
         "gui", 0,
         "isVisible", false
     )

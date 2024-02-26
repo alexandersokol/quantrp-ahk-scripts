@@ -25,10 +25,14 @@ global plainTextPlayInProgress := false
     5::
     M::
     N::
-    I::
+    T::
+    F6::
+    I::DoNothing()
     Esc::CancelPlainTextSay()
 #HotIf
 
+DoNothing(){
+}
 
 CancelPlainTextSay(){
     global plainTextPlayInProgress := false
