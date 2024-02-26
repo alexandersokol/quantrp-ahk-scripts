@@ -98,7 +98,9 @@ analysisComponents := [
     uiText("Флюорографія"),
     uiText("Рентген"),
     uiText("ДНК Тест"),
-    uiText("МРТ"),
+    uiText("МРТ - дослідження", () => GuiHandle_ClickAndHide(Medic_Analysis_MRTProcessing)),
+    uiText("МРТ - результати", () => GuiHandle_ClickAndHide(Medic_Analysis_MRTResults)),
+    uiText("МРТ - друк результатів", () => GuiHandle_ClickAndHide(Medic_Analysis_MRTPrintResults)),
     uiBack("surgeon")
 ]
 

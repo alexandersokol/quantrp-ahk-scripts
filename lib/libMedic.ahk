@@ -540,9 +540,36 @@ Medic_Surgery_Anasthesia() {
 
 
 ; ====================================================================
-; Plays random text variation for surgery anasthesia
+; Plays random text variation for surgery appendix removal
 ;
 Medic_Surgery_AppendixRemoval() {
     Log("Medic_Surgery_AppendixRemoval triggered")
     PlainTextSay(SURGERY_APPENDIX_REMOVAL)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis MRT Processing
+;
+Medic_Analysis_MRTProcessing() {
+    Log("Medic_Analysis_MRTProcessing triggered")
+    PlainTextSay(ANALYSIS_MRT_PRECESSING)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis MRT Results
+;
+Medic_Analysis_MRTResults() {
+    Log("Medic_Analysis_MRTResults triggered")
+    PlainTextSay(ANALYSIS_MRT_RESULTS)
+}
+
+
+; ====================================================================
+; Plays random text variation for analysis MRT Print results
+;
+Medic_Analysis_MRTPrintResults() {
+    Log("Medic_Analysis_MRTPrintResultstriggered")
+    PlainTextSay(ANALYSIS_MRT_PRINT_RESULTS)
 }
