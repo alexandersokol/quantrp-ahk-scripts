@@ -10,14 +10,43 @@ SCREENSHOT_BLOOD_DONATION_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\blood-donation"
 SCREENSHOT_PREMIUM_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\premium"
 
 
+global plainTextPlayInProgress := false
+
+#HotIf plainTextPlayInProgress
+    W::
+    D::
+    E::
+    A::
+    S::
+    1::
+    2::
+    3::
+    4::
+    5::
+    M::
+    N::
+    I::
+    Esc::CancelPlainTextSay()
+#HotIf
+
+
+CancelPlainTextSay(){
+    global plainTextPlayInProgress := false
+}
+
 ; ====================================================================
 ; Plays text variation from given array
 ;
 PlainTextSay(variationsArray) {
+    global plainTextPlayInProgress := true
+
     variation := RandomItem(variationsArray)
     Loop variation.Length
     {
-        map := variation[A_Index]
+       map := variation[A_Index]
+
+       if (!plainTextPlayInProgress)
+        return
 
        if (map["type"] == "text") {
             PlainPlayText(map)    
@@ -28,6 +57,8 @@ PlainTextSay(variationsArray) {
             PlainPlayScreenshot(map)
        }
     }
+
+    global plainTextPlayInProgress := false
 }
 
 
@@ -35,10 +66,21 @@ PlainTextSay(variationsArray) {
 ; Plays text variation
 ;
 PlainPlayText(map) {
+    global plainTextPlayInProgress
+
+    if (!plainTextPlayInProgress)
+        return
+
     if map["delay_before"] > 0
         Sleep(map["delay_before"])
 
+    if (!plainTextPlayInProgress)
+        return
+
     Chat_Say(map["text"])
+
+    if (!plainTextPlayInProgress)
+        return
 
     if map["delay_after"] > 0
         Sleep(map["delay_after"])
@@ -49,6 +91,11 @@ PlainPlayText(map) {
 ; Plays delay variation
 ;
 PlainPlayDelay(map) {
+    global plainTextPlayInProgress
+
+    if (!plainTextPlayInProgress)
+        return
+
     if map["delay_before"] > 0
         Sleep(map["delay_before"])
 }
@@ -58,11 +105,26 @@ PlainPlayDelay(map) {
 ; Plays screenshot variation
 ;
 PlainPlayScreenshot(map) {
+    global plainTextPlayInProgress
+
+    if (!plainTextPlayInProgress)
+        return
+
     if map["delay_before"] > 0
         Sleep(map["delay_before"])
 
+    if (!plainTextPlayInProgress)
+        return
+
     Sleep(200)
+
+    if (!plainTextPlayInProgress)
+        return
+
     Take_ScreenShot()
+
+    if (!plainTextPlayInProgress)
+        return
 
     if map["delay_after"] > 0
         Sleep(map["delay_after"])
@@ -617,4 +679,13 @@ Medic_Proctology_HemorrhoidsHealing() {
 Medic_Proctology_ProctologyEnema() {
     Log("Medic_Proctology_ProctologyEnema triggered")
     PlainTextSay(PROCTOLOGY_ENEMA)
+}
+
+
+; ====================================================================
+; Plays random text variation for proctology check
+;
+Medic_Proctology_Check() {
+    Log("Medic_Proctology_Check triggered")
+    PlainTextSay(PROCTOLOGY_CHECK)
 }

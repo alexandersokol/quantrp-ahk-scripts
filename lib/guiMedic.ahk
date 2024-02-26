@@ -69,7 +69,7 @@ surgeonComponents := [
     uiTitle("Хірургія"),
     uiText("Дослідження", () => GuiHandle_MenuClick("analysis")),
     uiText("Гінекологія", () => GuiHandle_MenuClick("gynecology")),
-    uiText("-Проктологія"),
+    uiText("Проктологія", () => GuiHandle_MenuClick("proctology")),
     uiText("-Урологія"),
     uiText("Отоларингологія", () => GuiHandle_MenuClick("otolaryngology")),
     uiText("Офтальмологія", () => GuiHandle_MenuClick("oftalmology")),
@@ -151,6 +151,7 @@ narcologyComponents := [
 
 proctologyComponents := [
     uiTitle("Проктологія"),
+    uiText("Огляд", () => GuiHandle_ClickAndHide(Medic_Proctology_Check)),
     uiText("Свічка", () => GuiHandle_ClickAndHide(Medic_Proctology_InsertMeds)),
     uiText("Видалення геморою", () => GuiHandle_ClickAndHide(Medic_Proctology_HemorrhoidsHealing)),
     uiText("Клізма", () => GuiHandle_ClickAndHide(Medic_Proctology_ProctologyEnema)),
@@ -240,6 +241,11 @@ global menus := Map(
         "isVisible", false
     ),
     "narcology", Map(
+        "components", stomatologyComponents,
+        "gui", 0,
+        "isVisible", false
+    ),
+    "proctology", Map(
         "components", stomatologyComponents,
         "gui", 0,
         "isVisible", false
