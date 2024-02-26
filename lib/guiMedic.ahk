@@ -337,7 +337,7 @@ appendText(menuGui, component){
     menuGui.SetFont(TEXT_SIZE " " TEXT_COLOR)
     uiComponent := menuGui.Add("Text",,component["text"])
     if (IsObject(component["onClickHandler"])) {
-        uiComponent.OnEvent("Click", () => component["onClickHandler"].Call())
+        uiComponent.OnEvent("Click", (*) => component["onClickHandler"].Call())
     }
 }
 
@@ -360,7 +360,7 @@ appendBack(menuGui, component){
     menuGui.Add("Progress", "h1 " DIVIDER_COLOR " -Smooth", "100")
     uiComponent := menuGui.Add("Text",,component["text"])
     if (IsObject(component["onClickHandler"])) {
-        uiComponent.OnEvent("Click", () => component["onClickHandler"].Call())
+        uiComponent.OnEvent("Click", (*) => component["onClickHandler"].Call())
     }
 }
 
