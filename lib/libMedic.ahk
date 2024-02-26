@@ -591,3 +591,30 @@ Medic_Narcologyst_DrugsTest() {
     Log("Medic_Narcologyst_DrugsTest triggered")
     PlainTextSay(NARCOLOGYST_DRUGS_TEST)
 }
+
+
+; ====================================================================
+; Plays random text variation for proctology insert meds
+;
+Medic_Proctology_InsertMeds() {
+    Log("Medic_Proctology_InsertMeds triggered")
+    PlainTextSay(PROCTOLOGY_INSERT_MEDS)
+}
+
+
+; ====================================================================
+; Plays random text variation for proctology hemorrhoids healing
+;
+Medic_Proctology_HemorrhoidsHealing() {
+    Log("Medic_Proctology_HemorrhoidsHealing triggered")
+    PlainTextSay(PROCTOLOGY_HEMORRHOIDS_HEALING)
+}
+
+
+; ====================================================================
+; Plays random text variation for proctology enema
+;
+Medic_Proctology_ProctologyEnema() {
+    Log("Medic_Proctology_ProctologyEnema triggered")
+    PlainTextSay(PROCTOLOGY_ENEMA)
+}

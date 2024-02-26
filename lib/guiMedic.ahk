@@ -149,6 +149,14 @@ narcologyComponents := [
     uiBack("surgeon")
 ]
 
+proctologyComponents := [
+    uiTitle("Проктологія"),
+    uiText("Свічка", () => GuiHandle_ClickAndHide(Medic_Proctology_InsertMeds)),
+    uiText("Видалення геморою", () => GuiHandle_ClickAndHide(Medic_Proctology_HemorrhoidsHealing)),
+    uiText("Клізма", () => GuiHandle_ClickAndHide(Medic_Proctology_ProctologyEnema)),
+    uiBack("surgeon")
+]
+
 musicComponents := [
     uiTitle("Музика"),
     uiText("Mashle and Mucles Intro", () => GuiHandle_ClickAndSend("https://audio.jukehost.co.uk/rfBTjOGmE5fWNIyP4Gb7BhOeYjpGOFck")),
