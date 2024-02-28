@@ -110,6 +110,7 @@ operationComponents := [
     uiText("Донор нирки", () => GuiHandle_ClickAndHide(Medic_Surgery_KidneyDonor)),
     uiText("Підготовка", () => GuiHandle_ClickAndHide(Medic_Surgery_Preparation)),
     uiText("Загальна анестезія", () => GuiHandle_ClickAndHide(Medic_Surgery_Anasthesia)),
+    uiText("Місцева анестезія", () => GuiHandle_ClickAndHide(Medic_Surgery_AnasthesiaLocal)),
     uiText("Початок операції", () => GuiHandle_ClickAndHide(Medic_Surgery_Start)),
     uiText("Видалення апендициту", () => GuiHandle_ClickAndHide(Medic_Surgery_AppendixRemoval)),
     uiBack("surgeon")

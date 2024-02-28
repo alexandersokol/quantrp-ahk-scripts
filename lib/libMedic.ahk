@@ -18,15 +18,23 @@ global plainTextPlayInProgress := false
     E::
     A::
     S::
+    M::
+    N::
+    T::
     1::
     2::
     3::
     4::
     5::
-    M::
-    N::
-    T::
+    6::
+    7::
+    8::
+    9::
+    F1::
+    F3::
     F6::
+    LControl::
+    RControl::
     I::DoNothing()
     Esc::CancelPlainTextSay()
 #HotIf
@@ -63,6 +71,7 @@ PlainTextSay(variationsArray) {
     }
 
     global plainTextPlayInProgress := false
+    PlaySound_Pop()
 }
 
 
@@ -81,7 +90,7 @@ PlainPlayText(map) {
     if (!plainTextPlayInProgress)
         return
 
-    Chat_Say(map["text"])
+    Chat_Say(GenderReplace(map["text"]))
 
     if (!plainTextPlayInProgress)
         return
@@ -132,6 +141,34 @@ PlainPlayScreenshot(map) {
 
     if map["delay_after"] > 0
         Sleep(map["delay_after"])
+}
+
+
+; ====================================================================
+; Replaces gender related texts
+;
+GenderReplace(input) {
+    start := InStr(input, "{")
+    delimeter := InStr(input, "|")
+    end := InStr(input, "}")
+
+    if (start > 0 && delimeter > 0 && end > 0){
+        origin := SubStr(input, start, end - start + 1)
+        replace := ""
+
+        if (GENDER == "M" || GENDER == "m") {
+            replace := SubStr(input, start + 1, delimeter - start - 1)
+        }
+        else if  (GENDER == "F" || GENDER == "f"){
+            replace := SubStr(input, delimeter + 1, end - delimeter - 1)
+        } else {
+            return input
+        }
+
+        return GenderReplace(StrReplace(input, origin, replace))
+    }
+
+    return input
 }
 
 
@@ -602,6 +639,15 @@ Medic_Surgery_Start() {
 Medic_Surgery_Anasthesia() {
     Log("Medic_Surgery_Anasthesia triggered")
     PlainTextSay(SURGERY_ANASTHESIA_VARIATIONS)
+}
+
+
+; ====================================================================
+; Plays random text variation for surgery anasthesia
+;
+Medic_Surgery_AnasthesiaLocal() {
+    Log("Medic_Surgery_AnasthesiaLocal triggered")
+    PlainTextSay(SURGERY_ANASTHESIA_LOCAL_VARIATIONS)
 }
 
 

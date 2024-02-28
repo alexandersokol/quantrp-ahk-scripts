@@ -146,7 +146,7 @@ PlaySound_Error() {
 Log(msg) {
     CurrentDateTime := FormatTime(A_Now ,"yyyy-MM-dd HH:mm:ss")
     StringToAppend := "[" . CurrentDateTime . "] " . msg . "`n"
-    FileAppend StringToAppend, LOG_FILE_PATH
+    FileAppend StringToAppend, LOG_FILE_PATH, "UTF-8"
 }
 
 
@@ -251,7 +251,7 @@ Take_ScreenShot(dir := "", filename := "") {
 
     output_path := dir . "\" . filename
 
-    Log("Screen size 1: " 0 " " 0 " " A_ScreenWidth " " A_ScreenHeight)
+    ; Log("Screen size 1: " 0 " " 0 " " A_ScreenWidth " " A_ScreenHeight)
 
     ; MouseGetPos(,, &WhichWindow, &WhichControl, 2)
     ; try ControlGetPos &x, &y, &w, &h, WhichControl, WhichWindow
