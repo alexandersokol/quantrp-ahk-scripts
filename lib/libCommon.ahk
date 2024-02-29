@@ -61,6 +61,42 @@ global POSITION_SPEEDBAR_X := 2225
 global POSITION_SPEEDBAR_Y := 1430
 COLOR_SPEEDBAR_FILLED := 0xBF9A27
 
+global isActionsLocked := false
+
+#HotIf isActionsLocked
+    W::
+    D::
+    E::
+    A::
+    S::
+    M::
+    N::
+    T::
+    1::
+    2::
+    3::
+    4::
+    5::
+    6::
+    7::
+    8::
+    9::
+    F1::
+    F3::
+    F6::
+    LControl::
+    RControl::
+    I::DoNothing()
+    Esc::CancelActionLock()
+#HotIf
+
+DoNothing(){
+}
+
+CancelActionLock(){
+    global isActionsLocked := false
+}
+
 ; ====================================================================
 ; Define positioning variables regarding to current screen size
 ;
@@ -137,6 +173,14 @@ PlaySound_Pop() {
 ;
 PlaySound_Error() {
     PlaySound("error.mp3")
+}
+
+
+; ====================================================================
+; Plays Start sound from sounds dir
+;
+PlaySound_Start() {
+    PlaySound("start-13691.mp3")
 }
 
 

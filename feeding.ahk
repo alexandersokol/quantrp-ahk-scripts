@@ -4,6 +4,7 @@
 
 FEED_INITIAL_DELAY_MS := 600000 ; 5 min
 FEED_NEXT_DELAY_MS := 1500000 ; 25 min
+FEED_RETRY_ACTION_LOCK_DELAY_MS := 300000 ; 5 min
 FEED_RETRY_ACTION_DELAY_MS := 120000 ; 2 min
 FEED_RETRY_MENU_DELAY_MS := 60000 ; 1 min
 FEED_FOOD_DELAY_MS := 5000
@@ -19,10 +20,13 @@ SetTimer TimeToFeed, FEED_INITIAL_DELAY_MS
 ; If not retries in some short period again.
 ;
 TimeToFeed()
-{
-    if isOnAction() {
-        SetTimer TimeToFeed, FEED_RETRY_ACTION_DELAY_MS
-        Log("Feeding: character is busy - some action in process")
+{   
+    if isActionsLocked {
+
+    }
+    else if isOnAction() {
+        SetTimer TimeToFeed, FEED_RETRY_ACTION_LOCK_DELAY_MS
+        Log("Feeding: character is busy - actions are locked")
     }
     else if !isOnGamingScreen() {
         SetTimer TimeToFeed, FEED_RETRY_MENU_DELAY_MS

@@ -10,54 +10,18 @@ SCREENSHOT_BLOOD_DONATION_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\blood-donation"
 SCREENSHOT_PREMIUM_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\premium"
 
 
-global plainTextPlayInProgress := false
-
-#HotIf plainTextPlayInProgress
-    W::
-    D::
-    E::
-    A::
-    S::
-    M::
-    N::
-    T::
-    1::
-    2::
-    3::
-    4::
-    5::
-    6::
-    7::
-    8::
-    9::
-    F1::
-    F3::
-    F6::
-    LControl::
-    RControl::
-    I::DoNothing()
-    Esc::CancelPlainTextSay()
-#HotIf
-
-DoNothing(){
-}
-
-CancelPlainTextSay(){
-    global plainTextPlayInProgress := false
-}
-
 ; ====================================================================
 ; Plays text variation from given array
 ;
 PlainTextSay(variationsArray) {
-    global plainTextPlayInProgress := true
+    global isActionsLocked := true
 
     variation := RandomItem(variationsArray)
     Loop variation.Length
     {
        map := variation[A_Index]
 
-       if (!plainTextPlayInProgress)
+       if (!isActionsLocked)
         return
 
        if (map["type"] == "text") {
@@ -70,8 +34,7 @@ PlainTextSay(variationsArray) {
        }
     }
 
-    global plainTextPlayInProgress := false
-    PlaySound_Pop()
+    global isActionsLocked := false
 }
 
 
@@ -79,20 +42,20 @@ PlainTextSay(variationsArray) {
 ; Plays text variation
 ;
 PlainPlayText(map) {
-    global plainTextPlayInProgress
+    global isActionsLocked
 
-    if (!plainTextPlayInProgress)
+    if (!isActionsLocked)
         return
 
     if map["delay_before"] > 0
         Sleep(map["delay_before"])
 
-    if (!plainTextPlayInProgress)
+    if (!isActionsLocked)
         return
 
     Chat_Say(GenderReplace(map["text"]))
 
-    if (!plainTextPlayInProgress)
+    if (!isActionsLocked)
         return
 
     if map["delay_after"] > 0
@@ -104,9 +67,9 @@ PlainPlayText(map) {
 ; Plays delay variation
 ;
 PlainPlayDelay(map) {
-    global plainTextPlayInProgress
+    global isActionsLocked
 
-    if (!plainTextPlayInProgress)
+    if (!isActionsLocked)
         return
 
     if map["delay_before"] > 0
@@ -118,25 +81,25 @@ PlainPlayDelay(map) {
 ; Plays screenshot variation
 ;
 PlainPlayScreenshot(map) {
-    global plainTextPlayInProgress
+    global isActionsLocked
 
-    if (!plainTextPlayInProgress)
+    if (!isActionsLocked)
         return
 
     if map["delay_before"] > 0
         Sleep(map["delay_before"])
 
-    if (!plainTextPlayInProgress)
+    if (!isActionsLocked)
         return
 
     Sleep(200)
 
-    if (!plainTextPlayInProgress)
+    if (!isActionsLocked)
         return
 
     Take_ScreenShot()
 
-    if (!plainTextPlayInProgress)
+    if (!isActionsLocked)
         return
 
     if map["delay_after"] > 0
@@ -207,6 +170,7 @@ Medic_SellVitamins() {
 Medic_BloodDonation() {
     Log("Blood donation triggred")
     PlainTextSay(BLOOD_DONATION_VARIATIONS)
+    PlaySound_Start()
 }
 
 
@@ -271,6 +235,7 @@ Medic_ReanimationClick(){
 Medic_MedCard_Temperature(){
     Log("Med Card pyrometer triggered")
     PlainTextSay(MED_CARD_TEMPERATURE_CHECK_VARIATIONS)
+    PlaySound_Start()
 }
 
 
@@ -280,6 +245,7 @@ Medic_MedCard_Temperature(){
 Medic_MedCard_Throat(){
     Log("Med Card throat triggered")
     PlainTextSay(MED_CARD_THROAT_CHECK_VARIATIONS )
+    PlaySound_Start()
 }
 
 
@@ -289,6 +255,7 @@ Medic_MedCard_Throat(){
 Medic_MedCard_Lungs(){
     Log("Med Card fonendoscope triggered")
     PlainTextSay(MED_CARD_LUNGS_CHECK_VARIATIONS)
+    PlaySound_Start()
 }
 
 
@@ -298,6 +265,7 @@ Medic_MedCard_Lungs(){
 Medic_MedCard_Sign(){
     Log("Med Card sign triggered")
     PlainTextSay(MED_CARD_SIGN_VARIATIONS)
+    PlaySound_Start()
 }
 
 
@@ -414,6 +382,7 @@ Medic_Analysis_Blood() {
     Chat_Do(gematocrit_text)
     Sleep(1500)
     Take_ScreenShot()
+    PlaySound_Start()
 }
 
 
@@ -423,6 +392,7 @@ Medic_Analysis_Blood() {
 Medic_Analysis_BloodPressure() {
     Log("Medic_Analysis_BloodPressure")
     PlainTextSay(ANALYSIS_BLOOD_PRESSURE_VARIATIONS)
+    PlaySound_Start()
 }
 
 
@@ -432,6 +402,7 @@ Medic_Analysis_BloodPressure() {
 Medic_Surgery_Plastic() {
     Log("Medic_Surgery_Plastic triggered")
     PlainTextSay(PLASCTIC_SURGERY_VARIATIONS)
+    PlaySound_Start()
 }
 
 
@@ -441,6 +412,7 @@ Medic_Surgery_Plastic() {
 Medic_Oculist_RightEyeCheck() {
     Log("Medic_Oculist_RightEyeCheck triggered")
     PlainTextSay(OCULIST_RIGHT_EYE_CHECK_VARIATIONS)
+    PlaySound_Start()
 }
 
 
@@ -450,6 +422,7 @@ Medic_Oculist_RightEyeCheck() {
 Medic_Oculist_LeftEyeCheck() {
     Log("Medic_Oculist_LeftEyeCheck triggered")
     PlainTextSay(OCULIST_LEFT_EYE_CHECK_VARIATIONS)
+    PlaySound_Start()
 }
 
 
