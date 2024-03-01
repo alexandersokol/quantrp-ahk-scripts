@@ -1,20 +1,31 @@
 #Requires AutoHotkey v2.0
 
-GENDER := "M" ; M - Male, F - Female
+#Include "libMedicSetup.ahk"
 
-DOCTOR_RANK := "7"
-DOCTOR_NAME := "Alex Aspero"
-STATIC_ID := "46746"
+; GENDER := "M" ; M - Male, F - Female
+
+; DOCTOR_RANK := "7"
+; DOCTOR_NAME := "Alex Aspero"
+; STATIC_ID := "46746"
+
+DOCTOR_RANK := medicPreferences["rank"]
+DOCTOR_NAME := medicPreferences["name"] " " medicPreferences["surname"]
+STATIC_ID := medicPreferences["staticId"]
+GENDER := medicPreferences["gender"]
 
 DOCTORS_BADGE := "[EMS | " DOCTOR_RANK " | " DOCTOR_NAME " | № " STATIC_ID "]"
 
+BADGE_PLAY_TEXT := "/b Йой! Я забув налаштувати бейджик в біндері!"
+if (Preferences_IsValid()) {
+    BADGE_PLAY_TEXT := "/do На грудях закріплений бейджик " DOCTORS_BADGE
+}
 
 ; ====================================================================
 ; Array with text variations for showing a doctor's badge
 ;
 BADGE_VARIATIONS := [
     [
-        text("/do На грудях закріплений бейджик " DOCTORS_BADGE)
+        text(BADGE_PLAY_TEXT)
     ]
 ]
 

@@ -4,10 +4,15 @@
 #Include "lib\libCommon.ahk"
 #Include "lib\libMedic.ahk"
 #Include "lib\guiMedic.ahk"
+#Include "lib\guiMedicSetup.ahk"
 
 Persistent true
 
-requestAdminRights()
+if (Preferences_IsValid()) {
+    requestAdminRights()
+} else {
+    Medic_PreferencesSetup(() => requestAdminRights())
+}
 
 #HotIf IsGameActive()
     >^R::Chat_Type("/rb ")         ; LCtrl + R - Open chat and print /rb 
