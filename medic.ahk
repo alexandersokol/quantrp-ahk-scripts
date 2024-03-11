@@ -25,6 +25,9 @@ if (Preferences_IsValid()) {
     >^9::Medic_Reanimation()
     >^h::Chat_Type("/heal ")
     >^b::Chat_Type("/blood ")
+    >^m::Chat_Type("/me ")
+    >^d::Chat_Type("/do ")
+    >^t::Chat_Type("/try ")
     XButton1::Medic_ReanimationClick()
 
     >^PgUp::Medic_MedCard_Temperature()

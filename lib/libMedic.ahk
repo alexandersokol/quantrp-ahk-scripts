@@ -3,12 +3,40 @@
 #Include "libCommon.ahk"
 #Include "textMedic.ahk"
 
-SCREENSHOT_DRUGS_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\drugs"
-SCREENSHOT_VITAMIN_DIR := SCREENSHOT_DRUGS_DIR
-SCREENSHOT_REANIMATION_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\reanimation"
-SCREENSHOT_BLOOD_DONATION_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\blood-donation"
-SCREENSHOT_PREMIUM_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\premium"
+REPORT_DIR := DEFAULT_SCREENSHOT_DIR_PATH . "\report"
+REPORT_REANIMATIONS_PATH := "\reanimations"
+REPORT_DRUGS_PATH := "\drugs"
 
+Medic_GetReportWeekName() {
+    currentDayOfWeek := A_WDay
+
+    workWeekDir := "-"
+    startTimeDiff := 0
+    endTimeDiff := 0
+
+    if (currentDayOfWeek == 7) { ; Saturday
+        startTimeDiff := 0
+        endTimeDiff := 6
+    } else {
+        startTimeDiff := currentDayOfWeek
+        endTimeDiff := 6 - currentDayOfWeek
+    }
+
+    weekStartTime := DateAdd(A_Now, -startTimeDiff, "Days")
+    weekEndTime := DateAdd(A_Now, endTimeDiff, "Days")
+
+    startFormat := FormatTime(weekStartTime ,"dd.MM")
+    endFormat := FormatTime(weekEndTime ,"dd.MM.yyyy")
+
+    return startFormat "-" endFormat
+}
+
+GetReportWeekDir(subdir := 0) {
+    if (subdir == 0) {
+        return REPORT_DIR "\" Medic_GetReportWeekName()
+    }
+    return REPORT_DIR "\" Medic_GetReportWeekName() "\" subdir
+}
 
 ; ====================================================================
 ; Plays text variation from given array
@@ -149,7 +177,7 @@ Medic_ShowBadge() {
 ;
 Medic_SellBlister() {
     Log("Selling drugs blister triggred")
-    Take_ScreenShot_DateDir(SCREENSHOT_DRUGS_DIR)
+    Take_ScreenShot_DateDir(GetReportWeekDir(REPORT_DRUGS_PATH))
     PlainTextSay(DRUGS_BLISTER_VARIATIONS)
 }
 
@@ -159,7 +187,7 @@ Medic_SellBlister() {
 ;
 Medic_SellVitamins() {
     Log("Selling vitamins triggred")
-    Take_ScreenShot_DateDir(SCREENSHOT_VITAMIN_DIR)
+    Take_ScreenShot_DateDir(GetReportWeekDir(REPORT_DRUGS_PATH))
     PlainTextSay(DRUGS_VITAMIN_VARIATIONS)
 }
 
@@ -183,7 +211,7 @@ Medic_Reanimation()
     Log("Reanimation triggred")
     PlainTextSay(REANIMATION_VARIATIONS)
     Sleep(300)
-    screenshotFile := Take_ScreenShot_DateDir(SCREENSHOT_REANIMATION_DIR)
+    screenshotFile := Take_ScreenShot(GetReportWeekDir())
 
     currentDayOfWeek := A_WDay
     currentHour := A_Hour
@@ -207,16 +235,20 @@ Medic_Reanimation()
         }
     }
 
-    CurrentDate := FormatTime(A_Now ,"dd.MM.yyyy")
-    outputDir := SCREENSHOT_PREMIUM_DIR . "\" . CurrentDate . "\" . dayShift
+    outputDir := GetReportWeekDir(REPORT_REANIMATIONS_PATH "\" dayShift)
     
     if not DirExist(outputDir)
         DirCreate outputDir
 
-    outputFile := SCREENSHOT_PREMIUM_DIR . "\" . CurrentDate . "\" . dayShift . "\*.*"
+    outputFile := outputDir "\*.*"
 
     FileCopy screenshotFile, outputFile
+
+    FileDelete screenshotFile
 }
+
+
+; Sun Mon Tue Wen Thu Fri Sat
 
 
 ; ====================================================================
