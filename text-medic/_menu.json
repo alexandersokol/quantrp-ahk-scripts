@@ -1,0 +1,26 @@
+{
+    "name" : "Головне",
+    "elements" : [
+        {
+            "name" : "Мед. Карта",
+            "elements": [
+                {
+                    "name" : "Темература",
+                    "file" : "medcard/temperature.json" 
+                },
+                {
+                    "name" : "Горло",
+                    "file" : "medcard/throat.json" 
+                },
+                {
+                    "name" : "Легені",
+                    "file" : "medcard/lungs.json" 
+                },
+                {
+                    "name" : "Виписати",
+                    "file" : "medcard/sign.json" 
+                }
+            ]
+        }
+    ]
+}
