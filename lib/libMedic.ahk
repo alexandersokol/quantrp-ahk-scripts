@@ -177,7 +177,7 @@ Medic_ShowBadge() {
 ;
 Medic_SellBlister() {
     Log("Selling drugs blister triggred")
-    Take_ScreenShot_DateDir(GetReportWeekDir(REPORT_DRUGS_PATH))
+    Take_ScreenShot(GetReportWeekDir(REPORT_DRUGS_PATH))
     PlainTextSay(DRUGS_BLISTER_VARIATIONS)
 }
 
@@ -187,7 +187,7 @@ Medic_SellBlister() {
 ;
 Medic_SellVitamins() {
     Log("Selling vitamins triggred")
-    Take_ScreenShot_DateDir(GetReportWeekDir(REPORT_DRUGS_PATH))
+    Take_ScreenShot(GetReportWeekDir(REPORT_DRUGS_PATH))
     PlainTextSay(DRUGS_VITAMIN_VARIATIONS)
 }
 
