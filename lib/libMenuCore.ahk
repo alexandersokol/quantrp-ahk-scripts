@@ -6,17 +6,67 @@
 
 ELEMENT_TEXT := "text"
 ELEMENT_MENU := "menu"
+ELEMENT_REFERENCE := "menu_reference"
 ELEMENT_SEQUENCE := "sequence"
 
-loadMenuDir(menuDir, menuName := "main") {
-    Log("Root: " menuDir)
+loadMedicMenuFlat(menuDir) {
+    flatMenuList := []
+    loadedItems := loadMenuDirFlatten(menuDir, "", "Меню", flatMenuList)
+
+    flatMap := Map()
+
+    for index, value in flatMenuList {
+        flatMap[value["id"]] := value
+    }
+
+    return flatMap
+}
+
+loadMenuDirFlatten(menuDir, parentId, menuName := "main", flatList := []) {
     items := []
 
+    ownId := _randomId()
     Loop Files, menuDir "\*", "D" {
-        ; Log("Dir: " A_LoopFileName)
-        Log("A_LoopFileName: " A_LoopFileName)
-        ; Log("A_LoopFilePath: " A_LoopFilePath)
-        items.Push(loadMenuDir(A_LoopFilePath, A_LoopFileName))
+        subMenu := loadMenuDirFlatten(A_LoopFilePath, ownId, A_LoopFileName, flatList)
+        items.Push(_menuElementReference(subMenu))
+        ; add submenu
+    }
+
+    Loop Files, menuDir "\*.txt" {
+        if (A_LoopFileName == "_menu.txt"){
+            infoItems := loadMenuInfo(A_LoopFilePath, menuName)
+            for index, value in infoItems
+                items.Push(value)
+        } else {
+            items.Push(loadMenuFile(A_LoopFileName, A_LoopFilePath))
+        }
+    }
+
+    Loop Files, menuDir "\*.json" {
+        subMenu := loadMenuJson(A_LoopFilePath, A_LoopFileName, ownId)
+        flatList.Push(subMenu)
+        items.Push(_menuElementReference(subMenu))
+    }
+
+    Loop Files, menuDir "\*.bb" {
+        subMenu := loadMenuJson(A_LoopFilePath, A_LoopFileName, ownId)
+        flatList.Push(subMenu)
+        items.Push(_menuElementReference(subMenu))
+    }
+    
+    result := _menuElement(ownId, parentId, menuName, items)
+    flatList.Push(result)
+    return result
+}
+
+
+loadMenuDir(menuDir, parentId, menuName := "main") {
+    items := []
+
+    ownId := _randomId()
+
+    Loop Files, menuDir "\*", "D" {
+        items.Push(loadMenuDir(A_LoopFilePath, ownId, A_LoopFileName))
     }
 
     Loop Files, menuDir "\*.txt"
@@ -29,17 +79,19 @@ loadMenuDir(menuDir, menuName := "main") {
         }
 
         Loop Files, menuDir "\*.json"
-            items.Push(loadMenuJson(A_LoopFilePath, A_LoopFileName))
+            items.Push(loadMenuJson(A_LoopFilePath, A_LoopFileName, ownId))
 
         Loop Files, menuDir "\*.bb"
-            items.Push(loadMenuJson(A_LoopFilePath, A_LoopFileName))
-
-    return _menuElement(menuName, items)
+            items.Push(loadMenuJson(A_LoopFilePath, A_LoopFileName, ownId))
+    
+    return _menuElement(ownId, parentId, menuName, items)
 }
 
-loadMenuJson(filePath, filename){
+loadMenuJson(filePath, filename, parentId){
     json := FileRead(filePath, "UTF-8")
     obj := Jxon_Load(&json)
+
+    ownId := _randomId()
 
     name := filename
     if (obj.Has("name")){
@@ -59,14 +111,13 @@ loadMenuJson(filePath, filename){
 
     load_bb_sequences(filePath)
 
-    return _menuElement(name, items)
+    return _menuElement(ownId, parentId, name, items)
 }
 
 
 ; ====================================================================
 ; Loads info from _menu.txt file
 loadMenuInfo(filePath, menuName) {
-    Log("File: " filePath)
     file := FileOpen(filePath, "r", "UTF-8")
 
     menuItems := []
@@ -76,11 +127,9 @@ loadMenuInfo(filePath, menuName) {
         return menuItems
     }
 
-    Log("Menu name " menuName)
     while !file.AtEOF {
         line := file.ReadLine()
         menuItems.Push(_textElement(line))
-        Log("read line: " line)
     }
 
     file.Close()
@@ -118,30 +167,43 @@ _textElement(name) {
     )
 }
 
-_menuElement(name, items){
+_menuElement(id, parentId,  name, items){
     return Map(
+        "id", id,
+        "parentId", parentId,
         "type", ELEMENT_MENU,
         "name", name,
         "items", items
     )
 }
 
-loadedItems := loadMenuDir("C:\Users\rraze\OneDrive\Documents\AutoHotkey\quantrp-ahk-scripts\medic-menu")
-
-
-json := Jxon_Dump(loadedItems, indent := 0)
-JSON_MENU_FILE_PATH := A_WorkingDir . "\menu.json"
-try {
-    FileDelete JSON_MENU_FILE_PATH
+_menuElementReference(menu){
+    return Map(
+        "id", menu["id"],
+        "type", ELEMENT_REFERENCE,
+        "name", menu["name"],
+    )
 }
-FileAppend(json, JSON_MENU_FILE_PATH, "UTF-8")
 
-
-json := Jxon_Dump(GLOBAL_SEQUENCES, indent := 0)
-JSON_MENU_FILE_PATH := A_WorkingDir . "\sequence.json"
-try {
-    FileDelete JSON_MENU_FILE_PATH
+_randomId() {
+    return Format("{:X}", A_TickCount) ":" Random(1, 100000) ":" Random(1, 200000) ":" Random(1, 300000)
 }
-FileAppend(json, JSON_MENU_FILE_PATH, "UTF-8")
 
-ExitApp
+; loadedItems := loadMedicMenuFlat("C:\Users\rraze\OneDrive\Documents\AutoHotkey\quantrp-ahk-scripts\medic-menu")
+
+; json := Jxon_Dump(loadedItems, indent := 0)
+; JSON_MENU_FILE_PATH := A_WorkingDir . "\menu.json"
+; try {
+;     FileDelete JSON_MENU_FILE_PATH
+; }
+; FileAppend(json, JSON_MENU_FILE_PATH, "UTF-8")
+
+
+; json := Jxon_Dump(GLOBAL_SEQUENCES, indent := 0)
+; JSON_MENU_FILE_PATH := A_WorkingDir . "\sequence.json"
+; try {
+;     FileDelete JSON_MENU_FILE_PATH
+; }
+; FileAppend(json, JSON_MENU_FILE_PATH, "UTF-8")
+
+; ExitApp

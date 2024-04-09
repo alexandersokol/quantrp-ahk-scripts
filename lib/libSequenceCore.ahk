@@ -9,6 +9,7 @@ SEQ_ELEMENT_SCREENSHOT_SURGEON := "screenshot_surgeon"
 SEQ_ELEMENT_SCREENSHOT_DRUGS := "screenshot_drugs"
 SEQ_ELEMENT_SCREENSHOT_REANIMATION := "screenshot_reanim"
 SEQ_ELEMENT_SCREENSHOT_PATH := "screenshot_path"
+SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM := "blood_analysis_random"
 
 SEQ_EXT_ELEMENT_BREAK := "break"
 SEQ_EXT_ELEMENT_UNKNOWN := "unknown"
@@ -96,7 +97,6 @@ _load_bb_action_screenshot(value){
 }
 
 load_txt_sequences(filePath, reference){
-    Log("Seq File: " filePath)
     file := FileOpen(filePath, "r", "UTF-8")
 
     variations := []
@@ -163,6 +163,9 @@ _get_seq_element(type, line){
     else if (type == SEQ_ELEMENT_BEEP){
         return _build_seq_element_beep()
     }
+    else if (type == SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM){
+        return _build_seq_blood_analysis_random()
+    }
 
     return 0
 }
@@ -193,6 +196,9 @@ _get_element_type(line) {
         }
         else if(type == SEQ_ELEMENT_BEEP){
             return SEQ_ELEMENT_BEEP
+        }
+        else if(type == SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM){
+            return SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM
         }
         else {
             return SEQ_EXT_ELEMENT_UNKNOWN
@@ -245,6 +251,12 @@ _build_seq_element_screenshot_drugs() {
 _build_seq_element_screenshot_reanimation() {
     return Map(
         "type", SEQ_ELEMENT_SCREENSHOT_REANIMATION
+    )
+}
+
+_build_seq_blood_analysis_random() {
+    return Map(
+        "type", SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM
     )
 }
 
