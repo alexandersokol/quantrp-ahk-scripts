@@ -1,5 +1,7 @@
 #Requires AutoHotkey v2.0
 #Include "_JXON.ahk"
+#Include "libCommon.ahk"
+#Include "libMedic2.ahk"
 
 SEQ_ELEMENT_TEXT := "text"
 SEQ_ELEMENT_DELAY := "delay"
@@ -10,6 +12,7 @@ SEQ_ELEMENT_SCREENSHOT_DRUGS := "screenshot_drugs"
 SEQ_ELEMENT_SCREENSHOT_REANIMATION := "screenshot_reanim"
 SEQ_ELEMENT_SCREENSHOT_PATH := "screenshot_path"
 SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM := "blood_analysis_random"
+SEQ_ELEMENT_BADGE := "badge"
 
 SEQ_EXT_ELEMENT_BREAK := "break"
 SEQ_EXT_ELEMENT_UNKNOWN := "unknown"
@@ -166,6 +169,9 @@ _get_seq_element(type, line){
     else if (type == SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM){
         return _build_seq_blood_analysis_random()
     }
+    else if (type == SEQ_ELEMENT_BADGE){
+        return _build_seq_badge()
+    }
 
     return 0
 }
@@ -199,6 +205,9 @@ _get_element_type(line) {
         }
         else if(type == SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM){
             return SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM
+        }
+        else if(type == SEQ_ELEMENT_BADGE){
+            return SEQ_ELEMENT_BADGE
         }
         else {
             return SEQ_EXT_ELEMENT_UNKNOWN
@@ -254,6 +263,12 @@ _build_seq_element_screenshot_reanimation() {
     )
 }
 
+_build_seq_badge() {
+    return Map(
+        "type", SEQ_ELEMENT_BADGE
+    )
+}
+
 _build_seq_blood_analysis_random() {
     return Map(
         "type", SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM
@@ -264,4 +279,146 @@ _build_seq_element_beep() {
     return Map(
         "type", SEQ_ELEMENT_BEEP
     )
+}
+
+Sequence_Log_All(){
+    for key, value in GLOBAL_SEQUENCES {
+        Log("reference: " key)
+    }
+}
+
+
+Sequence_Play(reference) {
+    Log("Play by reference: " reference)
+    if (!GLOBAL_SEQUENCES.Has(reference)){
+        Log("Sequence " reference " not found!")
+        return
+    }
+
+    variations := GLOBAL_SEQUENCES[reference]
+    if (variations.Length == 0){
+        Log("Sequence " reference " has no variations!")
+        return
+    }
+
+    sequence := RandomItem(variations)
+    if (sequence.Length == 0){
+        Log("Sequence " reference " got an empty sequence to play!")
+        return
+    }
+
+    _Sequence_Play_Variation(sequence)
+}
+
+
+_Sequence_Play_Variation(sequence){
+    global isActionsLocked
+    isActionsLocked := true
+
+    for index, item in sequence {
+
+        if (!isActionsLocked){
+            PlaySound_Pop()
+            return
+        }
+
+        if (!item.Has("type")){
+            Log("Sequence item has no type!")
+            continue
+        }
+
+        type := item["type"]
+        if(type == SEQ_ELEMENT_TEXT){
+            _Play_Text(item)
+        } else if (type == SEQ_ELEMENT_DELAY){
+            _Play_Deleay(item)
+        } else if (type == SEQ_ELEMENT_SCREENSHOT){
+            _Play_Screenshot()
+        } else if (type == SEQ_ELEMENT_BEEP){
+            _Play_Beep()
+        } else if (type == SEQ_ELEMENT_SCREENSHOT_SURGEON){
+            _Play_Screenshot_Surgeon()
+        } else if (type == SEQ_ELEMENT_SCREENSHOT_DRUGS){
+            _Play_Screenshot_Drugs()
+        } else if (type == SEQ_ELEMENT_SCREENSHOT_REANIMATION){
+            _Play_Screenshot_Reanimation()
+        } else if (type == SEQ_ELEMENT_SCREENSHOT_PATH){
+            _Play_Screenshot_Path(item)
+        } else if (type == SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM){
+            _Play_Blood_Analysis_Random()
+        } else if (type == SEQ_ELEMENT_BADGE){
+            _Play_Badge()
+        } else {
+            Log("Uknown sequence item type " type "!")
+        }
+    }
+    isActionsLocked := false
+
+    if (sequence.Length > 5) {
+        _Play_Beep()
+    }
+}
+
+
+_Play_Blood_Analysis_Random() {
+    Medic_Analysis_Blood_Random()
+}
+
+
+_Play_Screenshot_Path(item) {
+    if(item.Has("path")){
+        path := item["path"]
+
+        if (!InStr(path, ":\")){
+            path := DEFAULT_SCREENSHOT_DIR_PATH "\" path
+        }
+
+        Take_ScreenShot(path)
+    } else {
+        Log("Screenshot path sequence has no path field!")
+    }
+    Take_ScreenShot(GetReportWeekDir(REANIMATIONS_DIR))
+}
+
+_Play_Badge(){
+    Chat_Say(BADGE_PLAY_TEXT)
+}
+
+_Play_Screenshot_Reanimation(){
+    Take_ScreenShot(GetReportWeekDir(REANIMATIONS_DIR))
+}
+
+
+_Play_Screenshot_Drugs(){
+    Take_ScreenShot(GetReportWeekDir(DRUGS_DIR))
+}
+
+_Play_Screenshot_Surgeon(){
+    Take_ScreenShot(GetReportWeekDir(SURGEON_DIR))
+}
+
+_Play_Beep(){
+    PlaySound_Start()
+}
+
+_Play_Screenshot(){
+    Take_ScreenShot()
+}
+
+_Play_Deleay(item){
+    if(item.Has("delay")){
+        Sleep(item["delay"])
+    } else {
+        Log("Delay sequence has no delay field!")
+    }
+}
+
+_Play_Text(item){
+    if (item.Has("text")){
+        text := GenderTextReplace(item["text"])
+        text := RandomTextReplace(text)
+        Chat_Say(text)
+    } else {
+        Log("Text sequence has no text field!")
+    }
 }

@@ -11,8 +11,3 @@ Persistent true
 requestAdminRights()
 
 ~+Esc::ProcessClose("GTA5.exe")     ; Shift + Esc - Close GTA5 game
-
-#HotIf IsGameActive()
-    ^LButton::LogMouseCords()       ; Ctrl + LMB - Print mouse coords in log
-    ^`::PrintStateToLog()           ; Ctrl + ` - Print state to log
-#HotIf

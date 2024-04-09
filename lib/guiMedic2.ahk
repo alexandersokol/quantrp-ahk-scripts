@@ -1,6 +1,5 @@
 #Requires AutoHotkey v2.0
 
-#Include "libMedic.ahk"
 #Include "libMenuCore.ahk"
 
 TITLE_TEXT_COLOR := "cffffff"
@@ -25,6 +24,7 @@ global menus := Map()
 toggleMedicUiVisibility(){
     global menus
 
+    global GTAWindowID := WinActive("A")
     Sleep(100)
 
     if (isAnyMenuVisible()){
@@ -84,6 +84,7 @@ _showMenu(id := ""){
 ;
 hideAllMenus(){
     global menus
+    global GTAWindowID := WinActive("A")
 
     for key, value in menus {
         if (value["isVisible"]) {
@@ -138,7 +139,7 @@ appendItem(menuGui, item){
         if(item["type"] == ELEMENT_REFERENCE && item.Has("id")) {
             uiComponent.OnEvent("Click", (*) => _showMenu(item["id"]))
         } else if(item["type"] == ELEMENT_SEQUENCE){
-            uiComponent.OnEvent("Click", (*) => {})
+            uiComponent.OnEvent("Click", (*) => GuiHandle_SequenceAndHide(item["reference"]))
         }
     }
 }
@@ -184,3 +185,24 @@ buildUiMenu(menu) {
     return menuGui
 }
 
+
+; ====================================================================
+; Hides menu and calls a function
+;
+GuiHandle_SequenceAndHide(reference) {
+    activateAndHideMenu()
+    Sleep(200)
+    Sequence_Play(reference)
+}
+
+
+; ====================================================================
+; Activate GTA 5 Game and hides menus
+;
+activateAndHideMenu(){
+    global GTAWindowID
+    if (GTAWindowID != 0) {
+        WinActivate(GTAWindowID)
+    }
+    hideAllMenus()
+}
