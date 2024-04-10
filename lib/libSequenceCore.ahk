@@ -12,6 +12,7 @@ SEQ_ELEMENT_SCREENSHOT_DRUGS := "screenshot_drugs"
 SEQ_ELEMENT_SCREENSHOT_REANIMATION := "screenshot_reanim"
 SEQ_ELEMENT_SCREENSHOT_PATH := "screenshot_path"
 SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM := "blood_analysis_random"
+SEQ_ELEMENT_BLOOD_ANALYSIS_OK := "blood_analysis_ok"
 SEQ_ELEMENT_BADGE := "badge"
 
 SEQ_EXT_ELEMENT_BREAK := "break"
@@ -169,6 +170,9 @@ _get_seq_element(type, line){
     else if (type == SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM){
         return _build_seq_blood_analysis_random()
     }
+    else if (type == SEQ_ELEMENT_BLOOD_ANALYSIS_OK){
+        return _build_seq_blood_analysis_ok()
+    }
     else if (type == SEQ_ELEMENT_BADGE){
         return _build_seq_badge()
     }
@@ -205,6 +209,9 @@ _get_element_type(line) {
         }
         else if(type == SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM){
             return SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM
+        }
+        else if(type == SEQ_ELEMENT_BLOOD_ANALYSIS_OK){
+            return SEQ_ELEMENT_BLOOD_ANALYSIS_OK
         }
         else if(type == SEQ_ELEMENT_BADGE){
             return SEQ_ELEMENT_BADGE
@@ -272,6 +279,12 @@ _build_seq_badge() {
 _build_seq_blood_analysis_random() {
     return Map(
         "type", SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM
+    )
+}
+
+_build_seq_blood_analysis_ok() {
+    return Map(
+        "type", SEQ_ELEMENT_BLOOD_ANALYSIS_OK
     )
 }
 
@@ -346,6 +359,8 @@ _Sequence_Play_Variation(sequence){
             _Play_Screenshot_Path(item)
         } else if (type == SEQ_ELEMENT_BLOOD_ANALYSIS_RANDOM){
             _Play_Blood_Analysis_Random()
+        } else if (type == SEQ_ELEMENT_BLOOD_ANALYSIS_OK){
+            _Play_Blood_Analysis_Ok()
         } else if (type == SEQ_ELEMENT_BADGE){
             _Play_Badge()
         } else {
@@ -357,6 +372,11 @@ _Sequence_Play_Variation(sequence){
     if (sequence.Length > 5) {
         _Play_Beep()
     }
+}
+
+
+_Play_Blood_Analysis_Ok() {
+    Medic_Analysis_Blood_Ok()
 }
 
 
