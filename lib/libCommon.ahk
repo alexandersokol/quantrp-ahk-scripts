@@ -239,6 +239,10 @@ Chat_OOC(message) {
 ; Sends a message into the game chat
 Chat_Say(message)
 {
+    if (!IsGameActive()){
+        return
+    }
+    
     Sleep(DELAY_MESSAGE_SEND)
     Send(BUTTON_OPEN_CHAT)
 

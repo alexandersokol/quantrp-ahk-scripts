@@ -388,7 +388,6 @@ _Play_Screenshot_Reanimation(){
     Take_ScreenShot(GetReportWeekDir(REANIMATIONS_DIR))
 }
 
-
 _Play_Screenshot_Drugs(){
     Take_ScreenShot(GetReportWeekDir(DRUGS_DIR))
 }
