@@ -1,7 +1,7 @@
 #Requires AutoHotkey v2.0
 #Include "_JXON.ahk"
 #Include "libCommon.ahk"
-#Include "libMedic2.ahk"
+#Include "libMedic.ahk"
 
 SEQ_ELEMENT_TEXT := "text"
 SEQ_ELEMENT_DELAY := "delay"
