@@ -17,4 +17,3 @@
 [2000]
 /do Операція успішно завершена
 [screenshot_surgeon]
-[beep]
