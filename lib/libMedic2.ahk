@@ -26,6 +26,23 @@ REANIMATIONS_DIR := "reanimations"
 SURGEON_DIR := "surgeon"
 DRUGS_DIR := "drugs"
 
+TEXT_CONST_YEAR := "{year}" ; year 2024
+TEXT_CONST_DAY := "{day}" ; day 7
+TEXT_CONST_DAY2 := "{day2}" ; day 07
+TEXT_CONST_MONTH := "{month}" ; month 2
+TEXT_CONST_MONTH2 := "{month2}" ; month 02
+TEXT_CONST_HOURS := "{hours}" ; hours 9
+TEXT_CONST_HOURS2 := "{hours2}" ; hours 09
+TEXT_CONST_MINUTES := "{minutes}" ; minutes 2
+TEXT_CONST_MINUTES2 := "{minutes2}" ; minutes 02
+TEXT_CONST_SECONDS := "{seconds}" ; seconds 2
+TEXT_CONST_SECONDS2 := "{seconds2}" ; seconds 02
+TEXT_CONST_DATE := "{date}" ; 10.04.2024
+TEXT_CONST_TIME := "{time}" ; 11:30
+TEXT_CONST_DATE_TIME := "{datetime}" ; 11:30 10.04.2024
+TEXT_CONST_RANDOM_10 := "{random_10}" ; 10
+TEXT_CONST_RANDOM_100 := "{random_100}" ; 10
+TEXT_CONST_RANDOM_1000 := "{random_1000}" ; 100
 
 Medic_GetReportWeekName() {
     currentDayOfWeek := A_WDay
@@ -160,6 +177,32 @@ Medic_Analysis_Blood_Random() {
     Sleep(1500)
     Take_ScreenShot()
     PlaySound_Start()
+}
+
+
+ConstantTextReplace(input){
+
+    CurrentDateTime := FormatTime(A_Now ,"yyyy-MM-dd HH:mm:ss")
+
+    result := StrReplace(input, TEXT_CONST_YEAR, A_YYYY)
+    result := StrReplace(result, TEXT_CONST_DAY, FormatTime(A_Now ,"d"))
+    result := StrReplace(result, TEXT_CONST_DAY2, A_DD)
+    result := StrReplace(result, TEXT_CONST_MONTH, FormatTime(A_Now ,"M"))
+    result := StrReplace(result, TEXT_CONST_MONTH2, A_MM)
+    result := StrReplace(result, TEXT_CONST_HOURS, FormatTime(A_Now ,"H"))
+    result := StrReplace(result, TEXT_CONST_HOURS2, A_Hour)
+    result := StrReplace(result, TEXT_CONST_MINUTES, FormatTime(A_Now ,"m"))
+    result := StrReplace(result, TEXT_CONST_MINUTES2, A_Min)
+    result := StrReplace(result, TEXT_CONST_SECONDS, FormatTime(A_Now ,"s"))
+    result := StrReplace(result, TEXT_CONST_SECONDS2, A_Sec)
+    result := StrReplace(result, TEXT_CONST_DATE, FormatTime(A_Now ,"dd.MM.yyyy"))
+    result := StrReplace(result, TEXT_CONST_TIME, FormatTime(A_Now ,"HH:mm"))
+    result := StrReplace(result, TEXT_CONST_DATE_TIME, FormatTime(A_Now ,"HH:mm dd.MM.yyyy"))
+    result := StrReplace(result, TEXT_CONST_RANDOM_10, Random(0, 10))
+    result := StrReplace(result, TEXT_CONST_RANDOM_100, Random(0, 100))
+    result := StrReplace(result, TEXT_CONST_RANDOM_1000, Random(0, 1000))
+
+    return result
 }
 
 ; ====================================================================

@@ -64,34 +64,8 @@ COLOR_SPEEDBAR_FILLED := 0xBF9A27
 global isActionsLocked := false
 
 #HotIf isActionsLocked
-    W::
-    D::
-    E::
-    A::
-    S::
-    M::
-    N::
-    T::
-    1::
-    2::
-    3::
-    4::
-    5::
-    6::
-    7::
-    8::
-    9::
-    F1::
-    F3::
-    F6::
-    LControl::
-    RControl::
-    I::DoNothing()
     Esc::CancelActionLock()
 #HotIf
-
-DoNothing(){
-}
 
 CancelActionLock(){
     global isActionsLocked := false
@@ -242,7 +216,8 @@ Chat_Say(message)
     if (!IsGameActive()){
         return
     }
-    
+
+    BlockInput true
     Sleep(DELAY_MESSAGE_SEND)
     Send(BUTTON_OPEN_CHAT)
 
@@ -251,6 +226,7 @@ Chat_Say(message)
 
     Sleep(DELAY_MESSAGE_SEND)
     Send(BUTTON_SEND_MESSAGE)
+    BlockInput false
 
     Log("Chat sent: " . message)
 }

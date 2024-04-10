@@ -2,3 +2,5 @@
 screenshots
 temp
 preferences.json
+/lib/bbInput
+/lib/bbOutput

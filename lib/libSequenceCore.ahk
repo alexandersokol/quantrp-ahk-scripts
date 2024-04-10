@@ -414,7 +414,8 @@ _Play_Deleay(item){
 
 _Play_Text(item){
     if (item.Has("text")){
-        text := GenderTextReplace(item["text"])
+        text := ConstantTextReplace(item["text"])
+        text := GenderTextReplace(text)
         text := RandomTextReplace(text)
         Chat_Say(text)
     } else {
