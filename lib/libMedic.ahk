@@ -222,7 +222,7 @@ Medic_Analysis_Blood_Ok() {
     leikozit_min := 4.5
     leikozit_max := 11.0
     leikozit_min_v := leikozit_min
-    leikozit_max_v := leikozit_max_v
+    leikozit_max_v := leikozit_max
 
     leikozit_value := Round(Random(leikozit_min_v * 10, leikozit_max_v * 10) / 10.0, 2)
     leikozit_result := "Норма"

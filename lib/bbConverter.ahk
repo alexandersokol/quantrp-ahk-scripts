@@ -112,9 +112,9 @@ ConvertFile(filePath, fileName) {
         id := sequenceMap["id"]
         sequence := sequenceMap["sequence"]
         
-        fileName := name "_(" fileName ").txt"
+        destFileName := name "_(" fileName ").txt"
 
-        SaveSequenceToFile(fileName, sequence)
+        SaveSequenceToFile(destFileName, sequence)
     }
 }
 
