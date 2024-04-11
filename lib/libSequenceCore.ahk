@@ -405,7 +405,7 @@ _Play_Badge(){
 }
 
 _Play_Screenshot_Reanimation(){
-    Take_ScreenShot(GetReportWeekDir(REANIMATIONS_DIR))
+    Screenshot_Reanimation()
 }
 
 _Play_Screenshot_Drugs(){

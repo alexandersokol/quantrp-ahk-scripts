@@ -75,6 +75,48 @@ GetReportWeekDir(subdir := 0) {
     return REPORT_DIR "\" Medic_GetReportWeekName() "\" subdir
 }
 
+; ====================================================================
+; Saves screenshot for permium and report.
+;
+Screenshot_Reanimation()
+{
+    screenshotFile := Take_ScreenShot(GetReportWeekDir())
+
+    currentDayOfWeek := A_WDay
+    currentHour := A_Hour
+    currentMinute := A_Min
+
+    minuteTrail := 0
+    if (currentDayOfWeek == 1 || currentDayOfWeek == 7) ; 1 - Sunday, 7 - Saturday
+    {
+        minuteTrail := 59
+    }
+
+    dayShift := "night"
+
+    if (currentHour >= 11 && currentHour < 23){
+        dayShift := "day"
+    } else {
+        if (currentHour == 23 && currentMinute <= minuteTrail){
+            dayShift := "day"
+        } else {
+            dayShift := "night"
+        }
+    }
+
+    outputDir := GetReportWeekDir(REANIMATIONS_DIR "\" dayShift)
+    
+    if not DirExist(outputDir)
+        DirCreate outputDir
+
+    outputFile := outputDir "\*.*"
+
+    FileCopy screenshotFile, outputFile
+
+    FileDelete screenshotFile
+}
+
+
 
 Medic_Analysis_Blood_Random() {
     Log("Medic_Analysis_Blood triggered")
