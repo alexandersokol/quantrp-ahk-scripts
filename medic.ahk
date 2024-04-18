@@ -35,7 +35,7 @@ if (Preferences_IsValid()) {
     ^Home::Sequence_Play("\medic-menu\2. Мед. Карта\3. Легені.txt")
     ^End::Sequence_Play("\medic-menu\2. Мед. Карта\4. Виписати карту.txt")
 
-    ^x::Sequence_Play("\medic-menu\1. Загальне\6. Немає тіла.txt")
+    >^x::Sequence_Play("\medic-menu\1. Загальне\6. Немає тіла.txt")
 
     `::toggleMedicUiVisibility()
 #HotIf
