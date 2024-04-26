@@ -217,7 +217,7 @@ Chat_Say(message)
         return
     }
 
-    BlockInput true
+    ; BlockInput true
     Sleep(DELAY_MESSAGE_SEND)
     Send(BUTTON_OPEN_CHAT)
 
@@ -226,7 +226,7 @@ Chat_Say(message)
 
     Sleep(DELAY_MESSAGE_SEND)
     Send(BUTTON_SEND_MESSAGE)
-    BlockInput false
+    ; BlockInput false
 
     Log("Chat sent: " . message)
 }
