@@ -2,10 +2,7 @@
 #SingleInstance Force
 
 #Include "lib\libCommon.ahk"
-; #Include "feeding.ahk"
-#Include "fishing.ahk"
-; #Include "medic.ahk"
-#Include "temp\"
+#Include "medic.ahk"
 
 Persistent true
 requestAdminRights()
