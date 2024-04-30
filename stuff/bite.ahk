@@ -1,6 +1,6 @@
 #Requires AutoHotkey v2.0
 
-#Include "lib\libCommon.ahk"
+#Include "..\lib\libCommon.ahk"
 
 FISHING_TURN_ON_SOUND_PATH := A_WorkingDir . "\sounds\fishing-on.wav"
 FISHING_TURN_OFF_SOUND_PATH := A_WorkingDir . "\sounds\fishing-off.wav"
