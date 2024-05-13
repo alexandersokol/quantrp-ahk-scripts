@@ -6,8 +6,8 @@ ELECTRIC_ICON_PADDING := 32
 ELECTRIC_SINGLE_AREA_SIZE := 120 + ELECTRIC_ICON_PADDING
 ELECTRIC_SEARCH_AREA_START_X := 285
 ELECTRIC_SEARCH_AREA_START_Y := 160
-ELECTRIC_TURN_ON_SOUND_PATH := A_WorkingDir . "\temp\e-on.wav"
-ELECTRIC_TURN_OFF_SOUND_PATH := A_WorkingDir . "\temp\e-off.wav"
+ELECTRIC_TURN_ON_SOUND_PATH := A_WorkingDir . "\stuff\e-on.wav"
+ELECTRIC_TURN_OFF_SOUND_PATH := A_WorkingDir . "\stuff\e-off.wav"
 
 global isElectricHelperActive := false
 
@@ -30,13 +30,13 @@ toggleElectricHelper(){
         {
             isElectricHelperActive := false
             SoundPlay ELECTRIC_TURN_OFF_SOUND_PATH
-            Log("Electric helper is on.")
+            Log("Electric helper is off.")
         }
     else
         {
             isElectricHelperActive := true
             SoundPlay ELECTRIC_TURN_ON_SOUND_PATH
-            Log("Electric helper is off.")
+            Log("Electric helper is on.")
         }
     
 }
@@ -59,6 +59,7 @@ lookUpForShortage(){
             return
         }
     }
+    Log("Eletric searching")
 
     CoordMode "Pixel", "Window"
     MouseMove ELECTRIC_SINGLE_AREA_SIZE, ELECTRIC_SINGLE_AREA_SIZE
