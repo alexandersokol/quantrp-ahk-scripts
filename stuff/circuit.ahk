@@ -2,10 +2,14 @@
 
 #Include "../lib/libCommon.ahk"
 
-ELECTRIC_ICON_PADDING := 32
-ELECTRIC_SINGLE_AREA_SIZE := 120 + ELECTRIC_ICON_PADDING
-ELECTRIC_SEARCH_AREA_START_X := 285
-ELECTRIC_SEARCH_AREA_START_Y := 160
+; ELECTRIC_ICON_PADDING := 32
+ELECTRIC_ICON_PADDING := 43
+; ELECTRIC_SINGLE_AREA_SIZE := 120 + ELECTRIC_ICON_PADDING
+ELECTRIC_SINGLE_AREA_SIZE := 160 + ELECTRIC_ICON_PADDING
+; ELECTRIC_SEARCH_AREA_START_X := 285
+ELECTRIC_SEARCH_AREA_START_X := 402
+; ELECTRIC_SEARCH_AREA_START_Y := 160
+ELECTRIC_SEARCH_AREA_START_Y := 235
 ELECTRIC_TURN_ON_SOUND_PATH := A_WorkingDir . "\stuff\e-on.wav"
 ELECTRIC_TURN_OFF_SOUND_PATH := A_WorkingDir . "\stuff\e-off.wav"
 
@@ -86,6 +90,7 @@ lookUpForShortage(){
             {
                 found_X_Array.push(Px)
                 found_Y_Array.push(Py)
+                Log("[" xPos ":" yPos " - " Px ":" Py "] at [" x ":" y " | " endX ":" endY "]")
                 msg := msg " [" xPos ":" yPos " - " Px ":" Py "]"
             }    
         }
@@ -103,6 +108,7 @@ lookUpForShortage(){
             CoordMode "Pixel", "Window"
             Click found_X_Array[A_Index], found_Y_Array[A_Index]
             Sleep(200)
+            Log("Clicked on: [" found_X_Array[A_Index] ":" found_X_Array[A_Index] "]")
         }
     }
 }
