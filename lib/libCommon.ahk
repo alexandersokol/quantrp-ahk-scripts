@@ -1,7 +1,7 @@
 ﻿#Requires AutoHotkey v2.0
 #Include "ImagePut.ahk"
 
-DELAY_MESSAGE_SEND := 100
+DELAY_MESSAGE_SEND := 200
 
 BUTTON_OPEN_CHAT := "{F6}"
 BUTTON_SEND_MESSAGE := "{Enter}"
@@ -222,7 +222,7 @@ Chat_Say(message)
     Send(BUTTON_OPEN_CHAT)
 
     Sleep(DELAY_MESSAGE_SEND)
-    SendText(message)
+    Send("{Blind}" . message)
 
     Sleep(DELAY_MESSAGE_SEND)
     Send(BUTTON_SEND_MESSAGE)
@@ -240,7 +240,7 @@ Chat_Type(message) {
     Send(BUTTON_OPEN_CHAT)
 
     Sleep(DELAY_MESSAGE_SEND)
-    SendText(message)
+    Send("{Blind}" . message)
 
     Log("Chat type: " . message)
 }
@@ -251,7 +251,7 @@ Chat_Type(message) {
 ;
 Chat_ContinueInputAndSend(message) {
     Sleep(DELAY_MESSAGE_SEND)
-    SendText(message)
+    Send("{Blind}" . message)
 
     Sleep(DELAY_MESSAGE_SEND)
     Send(BUTTON_SEND_MESSAGE)

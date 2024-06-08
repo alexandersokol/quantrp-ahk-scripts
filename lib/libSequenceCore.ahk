@@ -321,6 +321,10 @@ Sequence_Play(reference) {
     }
 
     _Sequence_Play_Variation(sequence)
+
+    Send("{LControl Up}")
+    Send("{RControl Up}")
+    Send("{Ctrl up}")
 }
 
 
