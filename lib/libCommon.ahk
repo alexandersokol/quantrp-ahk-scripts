@@ -1,7 +1,7 @@
 ﻿#Requires AutoHotkey v2.0
 #Include "ImagePut.ahk"
 
-DELAY_MESSAGE_SEND := 200
+DELAY_MESSAGE_SEND := 100
 
 BUTTON_OPEN_CHAT := "{F6}"
 BUTTON_SEND_MESSAGE := "{Enter}"

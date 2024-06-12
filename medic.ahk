@@ -13,7 +13,7 @@ if (Preferences_IsValid()) {
     Medic_PreferencesSetup(() => requestAdminRights())
 }
 
-TIMER_DELAY := 100
+TIMER_DELAY := 10
 
 Alarm_Chat_Type() {
     SetTimer , 0
