@@ -291,6 +291,14 @@ Take_ScreenShot(dir := "", filename := "") {
 }
 
 
+Take_ScreenShot_Clipboard() {
+    GetWindowBounds(&X, &Y, &W, &H)
+    ImagePutClipboard([X, Y, W, H])
+    PlaySound(SOUND_CAMERA_SHUTTER)
+    Log("Screenshot taken to clipboard")
+}
+
+
 ; ====================================================================
 ; Takes screenshot and saves into dir within current date directory
 ;
