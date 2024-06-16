@@ -103,6 +103,14 @@ Alarm_Click_And_Reanimate() {
     Home::Sequence_Play("\medic-menu\1. Загальне\1. Реанімація.txt")
     End::Sequence_Play("\medic-menu\1. Загальне\2. Донор крові.txt")
 
+    Numpad2::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
+    Numpad6::Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
+    Numpad1::Sequence_Play("\medic-menu\1. Загальне\1. Реанімація.txt")
+    Numpad5::Sequence_Play("\medic-menu\1. Загальне\2. Донор крові.txt")
+
+    Numpad4::Chat_Type("/blood ")
+    Numpad8::Chat_Type("/heal ")
+
     ; ^PgUp::Sequence_Play("\medic-menu\2. Мед. Карта\1. Температура.txt")
     ; ^PgDn::Sequence_Play("\medic-menu\2. Мед. Карта\2. Горло.txt")
     ; ^Home::Sequence_Play("\medic-menu\2. Мед. Карта\3. Легені.txt")
