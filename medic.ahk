@@ -98,10 +98,10 @@ Alarm_Click_And_Reanimate() {
 
     XButton1::SetTimer(Alarm_Click_And_Reanimate, TIMER_DELAY)
 
-    PgUp::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
-    PgDn::Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
-    Home::Sequence_Play("\medic-menu\1. Загальне\1. Реанімація.txt")
-    End::Sequence_Play("\medic-menu\1. Загальне\2. Донор крові.txt")
+    ; PgUp::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
+    ; PgDn::Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
+    ; Home::Sequence_Play("\medic-menu\1. Загальне\1. Реанімація.txt")
+    ; End::Sequence_Play("\medic-menu\1. Загальне\2. Донор крові.txt")
 
     Numpad2::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
     Numpad6::Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
@@ -111,10 +111,10 @@ Alarm_Click_And_Reanimate() {
     Numpad4::Chat_Type("/blood ")
     Numpad8::Chat_Type("/heal ")
 
-    ; ^PgUp::Sequence_Play("\medic-menu\2. Мед. Карта\1. Температура.txt")
-    ; ^PgDn::Sequence_Play("\medic-menu\2. Мед. Карта\2. Горло.txt")
-    ; ^Home::Sequence_Play("\medic-menu\2. Мед. Карта\3. Легені.txt")
-    ; ^End::Sequence_Play("\medic-menu\2. Мед. Карта\4. Виписати карту.txt")
+    ^PgUp::Sequence_Play("\medic-menu\2. Мед. Карта\1. Температура.txt")
+    ^PgDn::Sequence_Play("\medic-menu\2. Мед. Карта\2. Горло.txt")
+    ^Home::Sequence_Play("\medic-menu\2. Мед. Карта\3. Легені.txt")
+    ^End::Sequence_Play("\medic-menu\2. Мед. Карта\4. Виписати карту.txt")
 
     >^x::Sequence_Play("\medic-menu\1. Загальне\6. Немає тіла.txt")
 
