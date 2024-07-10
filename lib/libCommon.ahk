@@ -219,13 +219,13 @@ Chat_Say(message)
 
     BlockInput true
     Sleep(DELAY_MESSAGE_SEND)
-    Send(BUTTON_OPEN_CHAT)
+    SendInput(BUTTON_OPEN_CHAT)
 
     Sleep(DELAY_MESSAGE_SEND)
-    Send(message)
+    SendText(message)
 
     Sleep(DELAY_MESSAGE_SEND)
-    Send(BUTTON_SEND_MESSAGE)
+    SendInput(BUTTON_SEND_MESSAGE)
     BlockInput false
 
     Log("Chat sent: " . message)
@@ -237,10 +237,10 @@ Chat_Say(message)
 ;
 Chat_Type(message) {
     Sleep(DELAY_MESSAGE_SEND)
-    Send(BUTTON_OPEN_CHAT)
+    SendInput(BUTTON_OPEN_CHAT)
 
     Sleep(DELAY_MESSAGE_SEND)
-    Send(message)
+    SendText(message)
 
     Log("Chat type: " . message)
 }

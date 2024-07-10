@@ -28,12 +28,14 @@ Alarm_Badge() {
 
 Alarm_Blister() {
     SetTimer , 0
-    Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
+    ; Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
+    Sequence_Play("\medic-menu\1. Загальне\4. Блістер - без скріна.txt")
 }
 
 Alarm_Tablet() {
     SetTimer , 0
-    Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
+    ; Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
+    Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка - без скріна.txt")
 }
 
 Alarm_Donor() {
@@ -96,15 +98,17 @@ Alarm_Click_And_Reanimate() {
     ^d::SetTimer(Alarm_Do, TIMER_DELAY)
     ^t::SetTimer(Alarm_Try, TIMER_DELAY)
 
-    XButton1::SetTimer(Alarm_Click_And_Reanimate, TIMER_DELAY)
-
+    XButton1::Click_And_Reanimate()
+    
     ; PgUp::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
     ; PgDn::Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
     ; Home::Sequence_Play("\medic-menu\1. Загальне\1. Реанімація.txt")
     ; End::Sequence_Play("\medic-menu\1. Загальне\2. Донор крові.txt")
 
-    Numpad2::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
-    Numpad6::Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
+    ; Numpad2::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
+    Numpad2::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка - без скріна.txt")
+    ; Numpad6::Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
+    Numpad6::Sequence_Play("\medic-menu\1. Загальне\4. Блістер - без скріна.txt")
     Numpad1::Sequence_Play("\medic-menu\1. Загальне\1. Реанімація.txt")
     Numpad5::Sequence_Play("\medic-menu\1. Загальне\2. Донор крові.txt")
 
@@ -119,6 +123,9 @@ Alarm_Click_And_Reanimate() {
     >^x::Sequence_Play("\medic-menu\1. Загальне\6. Немає тіла.txt")
 
     `::toggleMedicUiVisibility()
+
+    ; WheelDown::Click()
+
 #HotIf
 
 
