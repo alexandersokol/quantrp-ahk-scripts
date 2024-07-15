@@ -78,10 +78,12 @@ Alarm_Click_And_Reanimate() {
     Click_And_Reanimate()
 }
 
-\::Take_ScreenShot_Clipboard()
+^\::Take_ScreenShot_Clipboard()
+\::Take_ScreenShot()
+XButton2::Take_ScreenShot()
 
 #HotIf IsGameActive()
-    ^\::Take_ScreenShot()
+    
     ; \::Take_ScreenShot_Clipboard()
 
     ^R::SetTimer(Alarm_Chat_Type, TIMER_DELAY)
