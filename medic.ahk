@@ -14,6 +14,7 @@ if (Preferences_IsValid()) {
 }
 
 TIMER_DELAY := 10
+IS_CLICK_LOOP_ACTIVE := false
 
 Alarm_Chat_Type() {
     SetTimer , 0
@@ -127,6 +128,7 @@ XButton2::Take_ScreenShot()
     `::toggleMedicUiVisibility()
 
     ; WheelDown::Click()
+    MButton::Click_Loop()
 
 #HotIf
 
@@ -137,3 +139,27 @@ Click_And_Reanimate(){
     Sequence_Play("\medic-menu\1. Загальне\1. Реанімація.txt")
 }
 
+Click_Loop(){
+    global IS_CLICK_LOOP_ACTIVE
+        
+    if (IS_CLICK_LOOP_ACTIVE) {
+        IS_CLICK_LOOP_ACTIVE := false
+        PlaySound_Pop()
+    } else {
+        PlaySound_Start()
+        IS_CLICK_LOOP_ACTIVE := true
+        Click_Loop_Timer()
+    }
+
+}
+
+Click_Loop_Timer(){
+    global IS_CLICK_LOOP_ACTIVE
+
+    if (IS_CLICK_LOOP_ACTIVE){
+        Click()
+        SetTimer(Click_Loop_Timer, 100)
+    } else {
+        SetTimer , 0
+    }
+}
