@@ -29,14 +29,14 @@ Alarm_Badge() {
 
 Alarm_Blister() {
     SetTimer , 0
-    ; Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
-    Sequence_Play("\medic-menu\1. Загальне\4. Блістер - без скріна.txt")
+    Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
+    ; Sequence_Play("\medic-menu\1. Загальне\4. Блістер - без скріна.txt")
 }
 
 Alarm_Tablet() {
     SetTimer , 0
-    ; Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
-    Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка - без скріна.txt")
+    Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
+    ; Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка - без скріна.txt")
 }
 
 Alarm_Donor() {
@@ -85,7 +85,7 @@ XButton2::Take_ScreenShot()
 
 #HotIf IsGameActive()
     
-    ; \::Take_ScreenShot_Clipboard()
+    \::Take_ScreenShot_Clipboard()
 
     ^R::SetTimer(Alarm_Chat_Type, TIMER_DELAY)
 
@@ -108,10 +108,10 @@ XButton2::Take_ScreenShot()
     ; Home::Sequence_Play("\medic-menu\1. Загальне\1. Реанімація.txt")
     ; End::Sequence_Play("\medic-menu\1. Загальне\2. Донор крові.txt")
 
-    ; Numpad2::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
-    Numpad2::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка - без скріна.txt")
-    ; Numpad6::Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
-    Numpad6::Sequence_Play("\medic-menu\1. Загальне\4. Блістер - без скріна.txt")
+    Numpad2::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка.txt")
+    ; Numpad2::Sequence_Play("\medic-menu\1. Загальне\3. Вітамінка - без скріна.txt")
+    Numpad6::Sequence_Play("\medic-menu\1. Загальне\4. Блістер.txt")
+    ; Numpad6::Sequence_Play("\medic-menu\1. Загальне\4. Блістер - без скріна.txt")
     Numpad1::Sequence_Play("\medic-menu\1. Загальне\1. Реанімація.txt")
     Numpad5::Sequence_Play("\medic-menu\1. Загальне\2. Донор крові.txt")
 
@@ -125,7 +125,7 @@ XButton2::Take_ScreenShot()
 
     >^x::Sequence_Play("\medic-menu\1. Загальне\6. Немає тіла.txt")
 
-    `::toggleMedicUiVisibility()
+    ^`::toggleMedicUiVisibility()
 
     ; WheelDown::Click()
     MButton::Click_Loop()

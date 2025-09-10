@@ -14,7 +14,7 @@ DOCTOR_NAME := medicPreferences["name"] " " medicPreferences["surname"]
 STATIC_ID := medicPreferences["staticId"]
 GENDER := medicPreferences["gender"]
 
-DOCTORS_BADGE := "[EMS | " DOCTOR_RANK " | " DOCTOR_NAME " | № " STATIC_ID "]"
+DOCTORS_BADGE := "[EMS | " DOCTOR_RANK " | " DOCTOR_NAME " | " STATIC_ID "]"
 
 BADGE_PLAY_TEXT := "/b Йой! Я забув налаштувати бейджик в біндері!"
 if (Preferences_IsValid()) {

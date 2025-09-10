@@ -3,7 +3,7 @@
 
 DELAY_MESSAGE_SEND := 100
 
-BUTTON_OPEN_CHAT := "{F6}"
+BUTTON_OPEN_CHAT := "{T}"
 BUTTON_SEND_MESSAGE := "{Enter}"
 
 LOG_FILE_PATH := A_WorkingDir . "\logs.log"
