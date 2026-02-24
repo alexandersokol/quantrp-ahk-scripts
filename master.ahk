@@ -3,7 +3,7 @@
 
 #Include "lib\libCommon.ahk"
 
-#Include "stuff\bite.ahk"
+; #Include "stuff\bite.ahk"
 #Include "stuff\circuit.ahk"
 
 Persistent true
@@ -11,3 +11,12 @@ requestAdminRights()
 
 ~+Esc::ProcessClose("GTA5.exe")     ; Shift + Esc - Close GTA5 game
 \::Take_ScreenShot()
+XButton2::Take_ScreenShot()
+
+
+isClicking := false
+interval := 50  ; ms between left-clicks
+
+~WheelDown::Send "{e}"
+
+; #Include "stuff\arrows.ahk"
