@@ -77,30 +77,53 @@ Alarm_Click_And_Reanimate() {
 }
 
 #HotIf IsGameActive()
+    <^::return
     \::Take_ScreenShot()
 
-    ^R::SetTimer(Alarm_Chat_Type, TIMER_DELAY)
+    ; *^R::SetTimer(Alarm_Chat_Type, TIMER_DELAY)
 
-    ^q::SetTimer(Alarm_Badge, TIMER_DELAY)
-    ^=::SetTimer(Alarm_Blister, TIMER_DELAY)
-    ^-::SetTimer(Alarm_Tablet, TIMER_DELAY)
-    ^0::SetTimer(Alarm_Donor, TIMER_DELAY)
-    ^9::SetTimer(Alarm_Reanimation, TIMER_DELAY)
+    AppsKey & R::SetTimer(Alarm_Chat_Type, TIMER_DELAY)
 
-    ^h::SetTimer(Alarm_Heal, TIMER_DELAY)
-    ^b::SetTimer(Alarm_Blood, TIMER_DELAY)
-    ^m::SetTimer(Alarm_Me, TIMER_DELAY)
-    ^d::SetTimer(Alarm_Do, TIMER_DELAY)
-    ^t::SetTimer(Alarm_Try, TIMER_DELAY)
+    ; *^q::SetTimer(Alarm_Badge, TIMER_DELAY)
+    ; *^=::SetTimer(Alarm_Blister, TIMER_DELAY)
+    ; *^-::SetTimer(Alarm_Tablet, TIMER_DELAY)
+    ; *^0::SetTimer(Alarm_Donor, TIMER_DELAY)
+    ; *^9::SetTimer(Alarm_Reanimation, TIMER_DELAY)
+
+    AppsKey & q::SetTimer(Alarm_Badge, TIMER_DELAY)
+    AppsKey & =::SetTimer(Alarm_Blister, TIMER_DELAY)
+    AppsKey & -::SetTimer(Alarm_Tablet, TIMER_DELAY)
+    AppsKey & 0::SetTimer(Alarm_Donor, TIMER_DELAY)
+    AppsKey & 9::SetTimer(Alarm_Reanimation, TIMER_DELAY)
+
+
+    ; *^h::SetTimer(Alarm_Heal, TIMER_DELAY)
+    ; *^b::SetTimer(Alarm_Blood, TIMER_DELAY)
+    ; *^m::SetTimer(Alarm_Me, TIMER_DELAY)
+    ; *^d::SetTimer(Alarm_Do, TIMER_DELAY)
+    ; *^t::SetTimer(Alarm_Try, TIMER_DELAY)
+
+    AppsKey & h::SetTimer(Alarm_Heal, TIMER_DELAY)
+    AppsKey & b::SetTimer(Alarm_Blood, TIMER_DELAY)
+    AppsKey & m::SetTimer(Alarm_Me, TIMER_DELAY)
+    AppsKey & d::SetTimer(Alarm_Do, TIMER_DELAY)
+    AppsKey & t::SetTimer(Alarm_Try, TIMER_DELAY)
 
     XButton1::SetTimer(Alarm_Click_And_Reanimate, TIMER_DELAY)
 
-    ^PgUp::Sequence_Play("\medic-menu\2. Мед. Карта\1. Температура.txt")
-    ^PgDn::Sequence_Play("\medic-menu\2. Мед. Карта\2. Горло.txt")
-    ^Home::Sequence_Play("\medic-menu\2. Мед. Карта\3. Легені.txt")
-    ^End::Sequence_Play("\medic-menu\2. Мед. Карта\4. Виписати карту.txt")
+    ; ^PgUp::Sequence_Play("\medic-menu\2. Мед. Карта\1. Температура.txt")
+    ; ^PgDn::Sequence_Play("\medic-menu\2. Мед. Карта\2. Горло.txt")
+    ; ^Home::Sequence_Play("\medic-menu\2. Мед. Карта\3. Легені.txt")
+    ; ^End::Sequence_Play("\medic-menu\2. Мед. Карта\4. Виписати карту.txt")
 
-    >^x::Sequence_Play("\medic-menu\1. Загальне\6. Немає тіла.txt")
+    ; >^x::Sequence_Play("\medic-menu\1. Загальне\6. Немає тіла.txt")
+
+    AppsKey & PgUp::Sequence_Play("\medic-menu\2. Мед. Карта\1. Температура.txt")
+    AppsKey & PgDn::Sequence_Play("\medic-menu\2. Мед. Карта\2. Горло.txt")
+    AppsKey & Home::Sequence_Play("\medic-menu\2. Мед. Карта\3. Легені.txt")
+    AppsKey & End::Sequence_Play("\medic-menu\2. Мед. Карта\4. Виписати карту.txt")
+
+    AppsKey & x::Sequence_Play("\medic-menu\1. Загальне\6. Немає тіла.txt")
 
     `::toggleMedicUiVisibility()
 #HotIf
